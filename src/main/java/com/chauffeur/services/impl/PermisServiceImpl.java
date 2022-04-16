@@ -22,9 +22,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PermisServiceImpl implements PermisService {
 	
-	@Autowired
+	
     private final PermisRepository permisRepository;
 
+    @Autowired
     public PermisServiceImpl(PermisRepository permisRepository) {
         this.permisRepository = permisRepository;
     }
@@ -38,6 +39,31 @@ public class PermisServiceImpl implements PermisService {
                 )
         );
     }
+    
+    @Override
+	public PermisDto update(Long idPermis, PermisDto permisDto) {
+		if (!permisRepository.existsById(idPermis)) {
+            throw new ResourceNotFoundException("Permis not found");
+        }
+
+        Optional<Permis> permis = permisRepository.findById(idPermis);
+
+        if (!permis.isPresent()) {
+            throw new ResourceNotFoundException("Permis not found");
+        }
+
+        PermisDto permisDtoResult = PermisDto.fromEntityToDto(permis.get());
+        permisDtoResult.setTypePermis(permisDto.getTypePermis());
+        permisDtoResult.setDesignation(permisDto.getDesignation());
+        permisDtoResult.setValidite(permisDto.getValidite());
+       
+        return PermisDto.fromEntityToDto(
+        		permisRepository.save(
+        				PermisDto.fromDtoToEntity(permisDtoResult)
+                )
+        );
+	}
+
 
     @Override
     public PermisDto findById(Long id) {
@@ -61,15 +87,22 @@ public class PermisServiceImpl implements PermisService {
                 .map(PermisDto::fromEntityToDto)
                 .collect(Collectors.toList());
     }
-
+    
     @Override
-    public void delete(Long id) {
-        if (id == null) {
-            log.error("Permis Id is null");
-            return;
-        }
-        permisRepository.deleteById(id);
+	public List<PermisDto> findByPermisByIdDesc() {
+    	return permisRepository.findPermisByOrderByIdDesc().stream()
+                .map(PermisDto::fromEntityToDto)
+                .collect(Collectors.toList());
+	}
+	
+	 @Override
+	    public void delete(Long id) {
+	        if (id == null) {
+	            log.error("Permis Id is null");
+	            return;
+	        }
+	        permisRepository.deleteById(id);
 
-    }
+	    }
 
 }

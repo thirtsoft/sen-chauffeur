@@ -1,9 +1,11 @@
 package com.chauffeur.controllers;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chauffeur.controllers.api.RecruteurApi;
@@ -11,6 +13,7 @@ import com.chauffeur.dto.RecruteurDto;
 import com.chauffeur.services.RecruteurService;
 
 @RestController
+@CrossOrigin
 public class RecruteurController implements RecruteurApi {
 	
 	private RecruteurService recruteurService;
@@ -21,6 +24,12 @@ public class RecruteurController implements RecruteurApi {
 	}
 	@Override
 	public ResponseEntity<RecruteurDto> save(RecruteurDto recruteurDto) {
+		return ResponseEntity.ok(recruteurService.save(recruteurDto));
+	}
+	
+	@Override
+	public ResponseEntity<RecruteurDto> update(Long id, RecruteurDto recruteurDto) {
+		recruteurDto.setId(id);
 		return ResponseEntity.ok(recruteurService.save(recruteurDto));
 	}
 
@@ -39,5 +48,10 @@ public class RecruteurController implements RecruteurApi {
 		recruteurService.delete(id);
 		
 	}
+	@Override
+	public BigDecimal getNumbersOfRecruteurs() {
+		return recruteurService.countNumbersOfRecruteurs();
+	}
+	
 
 }

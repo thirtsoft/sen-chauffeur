@@ -1,15 +1,16 @@
 package com.chauffeur.models;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,22 +27,32 @@ public class Notification implements Serializable {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(name = "reference", length = 60)
-    private String reference;
+    private Long id;
 
     @Column(name = "nbreEtoile", length = 60)
-    private String nbreEtoile;
+    private float nbreEtoile;
 
-    @Column(name = "observation", length = 200)
+    @Column(name = "observation")
+    @Lob
     private String observation;
-
+    
+    @Column(name = "createdDate")
+    private Date createdDate;
+    
     @ManyToOne
-    @JoinColumn(name = "prodId", nullable = false)
+    @JoinColumn(name = "chauffId")
     private Chauffeur chauffeur;
 
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "userId")
     private Utilisateur utilisateur;
+    
+    public Notification(Long id, float nbreEtoile, String observation, Chauffeur chauffeur) {
+        this.id = id;
+        this.nbreEtoile = nbreEtoile;
+        this.observation = observation;
+        this.createdDate = new Date();
+        this.chauffeur = chauffeur;
+    }
+    
 }

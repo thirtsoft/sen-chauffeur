@@ -2,14 +2,18 @@ package com.chauffeur.dto;
 
 import com.chauffeur.models.Recruteur;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RecruteurDto {
 	
-	private long id;
+	private Long id;
 
 	private String firstName;
 
@@ -20,7 +24,7 @@ public class RecruteurDto {
 	private String addressRecruteur;
 
 	private String email;
-
+	
 	private String phoneRecruteur;
 	
 	private String website;
@@ -29,12 +33,15 @@ public class RecruteurDto {
 	
 	private String villeRecruteur;
 	
+	private String information;
+	
 	public static RecruteurDto fromEntityToDto(Recruteur recruteur) {
 		if (recruteur == null) {
 			return null;
 		}
 		
 		return RecruteurDto.builder()
+				.id(recruteur.getId())
 				.firstName(recruteur.getFirstName())
 				.lastName(recruteur.getLastName())
 				.addressRecruteur(recruteur.getAddressRecruteur())
@@ -44,6 +51,7 @@ public class RecruteurDto {
 				.secteurActivite(recruteur.getSecteurActivite())
 				.website(recruteur.getWebsite())
 				.villeRecruteur(recruteur.getVilleRecruteur())
+				.information(recruteur.getInformation())
 				
 				.build();
 		
@@ -54,6 +62,7 @@ public class RecruteurDto {
 			return null;
 		}
 		Recruteur recruteur = new Recruteur();
+		recruteur.setId(recruteurDto.getId());
 		recruteur.setFirstName(recruteurDto.getFirstName());
 		recruteur.setLastName(recruteurDto.getLastName());
 		recruteur.setAddressRecruteur(recruteurDto.getAddressRecruteur());
@@ -63,6 +72,7 @@ public class RecruteurDto {
 		recruteur.setSecteurActivite(recruteurDto.getSecteurActivite());
 		recruteur.setWebsite(recruteurDto.getWebsite());
 		recruteur.setVilleRecruteur(recruteurDto.getVilleRecruteur());
+		recruteur.setInformation(recruteurDto.getInformation());
 	
 		return recruteur;
 	}

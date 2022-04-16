@@ -1,9 +1,9 @@
 package com.chauffeur.enumeration;
 
 public enum RoleName {
-	ROLE_ADMIN,
-	ROLE_RECRUTEUR,
-	ROLE_PARTICULIER,
-	ROLE_USER
+	ROLE_USER,
+	ROLE_GESTIONNAIRE,
+	ROLE_MANAGER,
+	ROLE_ADMIN
 
 }
