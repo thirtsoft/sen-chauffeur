@@ -1,27 +1,25 @@
 package com.chauffeur.controllers;
 
 
+import com.chauffeur.controllers.api.UtilisateurApi;
+import com.chauffeur.dto.UtilisateurDto;
+import com.chauffeur.services.UtilisateurService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.chauffeur.controllers.api.UtilisateurApi;
-import com.chauffeur.dto.UtilisateurDto;
-import com.chauffeur.services.UtilisateurService;
-
 import org.springframework.web.multipart.MultipartFile;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 
 import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -29,26 +27,26 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class UtilisateurController implements UtilisateurApi {
-	
-	private UtilisateurService utilisateurService;
-	
-	@Autowired
-    ServletContext context;
 
-	@Autowired
-	public UtilisateurController(UtilisateurService utilisateurService) {
-		this.utilisateurService = utilisateurService;
-	}
-	@Override
-	public ResponseEntity<UtilisateurDto> save(UtilisateurDto utilisateurDto) {
-		return ResponseEntity.ok(utilisateurService.save(utilisateurDto));
-	}
-	
-	@Override
-	public ResponseEntity<UtilisateurDto> updateUtilisateur(Long id, UtilisateurDto utilisateurDto) {
-		utilisateurDto.setId(id);
-		return ResponseEntity.ok(utilisateurService.save(utilisateurDto));
-	}
+    @Autowired
+    ServletContext context;
+    private final UtilisateurService utilisateurService;
+
+    @Autowired
+    public UtilisateurController(UtilisateurService utilisateurService) {
+        this.utilisateurService = utilisateurService;
+    }
+
+    @Override
+    public ResponseEntity<UtilisateurDto> save(UtilisateurDto utilisateurDto) {
+        return ResponseEntity.ok(utilisateurService.save(utilisateurDto));
+    }
+
+    @Override
+    public ResponseEntity<UtilisateurDto> updateUtilisateur(Long id, UtilisateurDto utilisateurDto) {
+        utilisateurDto.setId(id);
+        return ResponseEntity.ok(utilisateurService.save(utilisateurDto));
+    }
 
     @Override
     public ResponseEntity<Boolean> updateUserProfil(ObjectNode json) {
@@ -56,17 +54,17 @@ public class UtilisateurController implements UtilisateurApi {
     }
 
     @Override
-	public ResponseEntity<UtilisateurDto> getUtilisateurById(Long id) {
-		return ResponseEntity.ok(utilisateurService.findById(id));
-	}
+    public ResponseEntity<UtilisateurDto> getUtilisateurById(Long id) {
+        return ResponseEntity.ok(utilisateurService.findById(id));
+    }
 
-	@Override
-	public ResponseEntity<List<UtilisateurDto>> getAllUtilisateurs() {
-		 List<UtilisateurDto> utilisateurDtoList = utilisateurService.findAll();
-	        return new ResponseEntity<>(utilisateurDtoList, HttpStatus.OK);
-	}
-	
-	@Override
+    @Override
+    public ResponseEntity<List<UtilisateurDto>> getAllUtilisateurs() {
+        List<UtilisateurDto> utilisateurDtoList = utilisateurService.findAll();
+        return new ResponseEntity<>(utilisateurDtoList, HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<List<UtilisateurDto>> getAllUtilisateursOrderByIdDesc() {
         List<UtilisateurDto> utilisateurDtoList = utilisateurService.findByOrderByIdDesc();
         return new ResponseEntity<>(utilisateurDtoList, HttpStatus.OK);
@@ -76,7 +74,7 @@ public class UtilisateurController implements UtilisateurApi {
     public ResponseEntity<UtilisateurDto> getUtilisateurByUsername(String username) {
         return null;
     }
-    
+
     @Override
     public ResponseEntity<Boolean> updateUsername(ObjectNode json) {
         String username;
@@ -189,6 +187,11 @@ public class UtilisateurController implements UtilisateurApi {
     }
 
     @Override
+    public BigDecimal getNumberOfRecruteurs() {
+        return utilisateurService.countNumberOfRecruteurs();
+    }
+
+    @Override
     public byte[] getPhoto(Long id) throws Exception {
         UtilisateurDto user = utilisateurService.findById(id);
         return Files.readAllBytes(Paths.get(context.getRealPath("/Images/") + user.getPhoto()));
@@ -197,7 +200,7 @@ public class UtilisateurController implements UtilisateurApi {
 
     @Override
     public void uploadUserPhoto(MultipartFile file, Long id) throws IOException {
-    	UtilisateurDto utilisateurDto = utilisateurService.findById(id);
+        UtilisateurDto utilisateurDto = utilisateurService.findById(id);
         String filename = file.getOriginalFilename();
         String newFileName = FilenameUtils.getBaseName(filename) + "." + FilenameUtils.getExtension(filename);
         File serverFile = new File(context.getRealPath("/Images/" + File.separator + newFileName));
@@ -214,12 +217,11 @@ public class UtilisateurController implements UtilisateurApi {
         }
     }
 
-	@Override
-	public void delete(Long id) {
-		utilisateurService.delete(id);
-		
-	}
-	
+    @Override
+    public void delete(Long id) {
+        utilisateurService.delete(id);
+
+    }
 
 
 }

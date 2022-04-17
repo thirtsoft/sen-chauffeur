@@ -3,6 +3,7 @@ package com.chauffeur.services;
 import com.chauffeur.dto.UtilisateurDto;
 import com.chauffeur.enumeration.RoleName;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface UtilisateurService {
@@ -28,6 +29,8 @@ public interface UtilisateurService {
     boolean updateCustomerProfileByUsername(String username, String name, String newUsername, String email, String mobile);
 
     UtilisateurDto activatedUser(String isActive, String id);
+
+    BigDecimal countNumberOfRecruteurs();
 
     List<UtilisateurDto> findAll();
 

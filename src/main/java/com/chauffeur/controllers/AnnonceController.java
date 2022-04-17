@@ -223,8 +223,18 @@ public class AnnonceController implements AnnonceApi {
 	}
 
 	@Override
+	public BigDecimal getNumberOfAnnoncesByStatusValidated() {
+		return annonceService.countNumberOfAnnonceByStatusValidated();
+	}
+
+	@Override
 	public BigDecimal getNumberOfAnnonceInMonth() {
 		return annonceService.countNumberOfAnnoncesInMonth();
+	}
+
+	@Override
+	public BigDecimal getNumberOfAnnonceInYear() {
+		return annonceService.countNumberOfAnnoncesInYear();
 	}
 
 	@Override

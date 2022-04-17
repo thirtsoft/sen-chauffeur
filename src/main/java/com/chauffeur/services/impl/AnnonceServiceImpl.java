@@ -214,8 +214,18 @@ public class AnnonceServiceImpl implements AnnonceService {
     }
 
     @Override
+    public BigDecimal countNumberOfAnnoncesInYear() {
+        return annonceRepository.countNumberOfAnnoncesInYear();
+    }
+
+    @Override
     public BigDecimal countNumberOfAnnonceByStatusPending() {
         return annonceRepository.countNumberOfAnnonceByStatusPending();
+    }
+
+    @Override
+    public BigDecimal countNumberOfAnnonceByStatusValidated() {
+        return annonceRepository.countNumberOfAnnonceByStatusValidated();
     }
 
     @Override

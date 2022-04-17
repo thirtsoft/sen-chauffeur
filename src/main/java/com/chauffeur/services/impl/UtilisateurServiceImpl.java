@@ -1,5 +1,6 @@
 package com.chauffeur.services.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -178,6 +179,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
         return UtilisateurDto.fromEntityToDto(utilisateurRepository.save(utilisateur));
 
+    }
+
+    @Override
+    public BigDecimal countNumberOfRecruteurs() {
+        return utilisateurRepository.countNumberOfRecruteurs();
     }
 
     @Override

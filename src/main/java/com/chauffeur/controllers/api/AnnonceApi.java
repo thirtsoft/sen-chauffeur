@@ -235,6 +235,16 @@ public interface AnnonceApi {
 		
 	})
 	BigDecimal getNumberOfAnnoncesByStatusPending();
+
+	@GetMapping(value = APP_ROOT + "/annonces/NumbersOfAnnonceByStatusValidated")
+	@ApiOperation(value = "Decompter le nombre total d'Annonces validées",
+			notes = "Cette méthode permet de compter et d'afficher le nombre total d'Annonces validées", response = AnnonceDto.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Le nombre d'Annonce"),
+			@ApiResponse(code = 400, message = "Aucun liste Annonce")
+
+	})
+	BigDecimal getNumberOfAnnoncesByStatusValidated();
 	
 	@GetMapping(value = APP_ROOT + "/annonces/NumbersOfAnnonceInMonth")
 	@ApiOperation(value = "Decompter le nombre total d'Annonces dans le mois",
@@ -245,7 +255,17 @@ public interface AnnonceApi {
 		
 	})
 	BigDecimal getNumberOfAnnonceInMonth();
-	
+
+	@GetMapping(value = APP_ROOT + "/annonces/NumbersOfAnnonceInYear")
+	@ApiOperation(value = "Decompter le nombre total d'Annonces dans une année",
+			notes = "Cette méthode permet de compter et d'afficher le nombre total d'Annonces dans une année", response = AnnonceDto.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Le nombre d'Annonce"),
+			@ApiResponse(code = 400, message = "Aucun liste Annonce")
+
+	})
+	BigDecimal getNumberOfAnnonceInYear();
+
 	@GetMapping(value = APP_ROOT + "/annonces/numberOfAnnonceByMonth", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Décompter les Annonces par mois",
 	    notes = "Cette méthode permet de recuperer et d'afficher le nombre de Annonces par mois sur un graphe")

@@ -30,6 +30,9 @@ public interface AnnonceRepository extends JpaRepository<Annonce, Long> {
     @Query("select count(c) from Annonce c where c.status = 'ENCOURS' ")
     BigDecimal countNumberOfAnnonceByStatusPending();
 
+	@Query("select count(c) from Annonce c where c.status = 'VALIDEE' ")
+	BigDecimal countNumberOfAnnonceByStatusValidated();
+
     @Query("select p from Annonce p where p.utilisateur.id =:user")
 	Annonce FindAnnonceByCustomerId(@Param("user") Long userId);
     

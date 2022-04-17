@@ -142,7 +142,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/annonces/searchAnnonceByPermisPageables/**").permitAll()
                 .antMatchers("/**/annonces/NumbersOfAnnonces").permitAll()
                 .antMatchers("/**/annonces/NumbersOfAnnonceByStatusPending").permitAll()
+                .antMatchers("/**/annonces/NumbersOfAnnonceByStatusValidated").permitAll()
                 .antMatchers("/**/annonces/NumbersOfAnnonceInMonth").permitAll()
+                .antMatchers("/**/annonces/NumbersOfAnnonceInYear").permitAll()
                 .antMatchers("/**/annonces/numberOfAnnonceByMonth").permitAll()
                 .antMatchers("/**/annonces/numberOfAnnonceByYear").permitAll()
                 .antMatchers("/**/annonces/allAnnonces").permitAll()
@@ -251,6 +253,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/utilisateurs/updatePasswordByUsername").permitAll()
                 .antMatchers("/**/utilisateurs/activatedUser/*").permitAll()
                 .antMatchers("/**/utilisateurs/updateProfil").permitAll()
+                .antMatchers("/**/utilisateurs/NumbersOfRecruteurs").permitAll()
 
                 .antMatchers("/**/historiqueLogins/searchHistoriqueLoginByIdDesc").permitAll()
                 .antMatchers("/**/historiqueLogins/*").permitAll()

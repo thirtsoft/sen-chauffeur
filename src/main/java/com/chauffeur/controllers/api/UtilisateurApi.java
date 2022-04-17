@@ -1,8 +1,10 @@
 package com.chauffeur.controllers.api;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 
+import com.chauffeur.dto.AnnonceDto;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -149,6 +151,16 @@ public interface UtilisateurApi {
             @ApiResponse(code = 400, message = "Aucun compte utilisateur activer")
     })
     ResponseEntity<?> activatedUser(@RequestParam("isActive") String isActive, @PathVariable("id") String id);
+
+    @GetMapping(value = APP_ROOT + "/utilisateurs/NumbersOfRecruteurs")
+    @ApiOperation(value = "Decompter le nombre total de Recruteurs",
+            notes = "Cette méthode permet de compter et d'afficher le nombre total de Recruteurs", response = AnnonceDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Le nombre de Recruteurs"),
+            @ApiResponse(code = 400, message = "Aucun liste Annonce")
+
+    })
+    BigDecimal getNumberOfRecruteurs();
 
     @DeleteMapping(value = APP_ROOT + "/utilisateurs/delete/{idUtilisateur}")
     @ApiOperation(value = "Supprimer un utilisateur par son ID",

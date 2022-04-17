@@ -25,7 +25,11 @@ public interface AnnonceService {
 
     BigDecimal countNumberOfAnnoncesInMonth();
 
+    BigDecimal countNumberOfAnnoncesInYear();
+
     BigDecimal countNumberOfAnnonceByStatusPending();
+
+    BigDecimal countNumberOfAnnonceByStatusValidated();
 
     List<AnnonceDto> findAll();
 
