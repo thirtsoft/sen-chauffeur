@@ -36,15 +36,6 @@ public class Permis implements Serializable {
 	
 	@Column(name = "validite", length = 90)
 	private int validite;
-	
-	/*
-	 * @OneToMany(cascade = CascadeType.ALL, mappedBy="permis", orphanRemoval =
-	 * true) private Set<Chauffeur> chauffeur;
-	 * 
-	 * @OneToMany(cascade = CascadeType.ALL, mappedBy="permis", orphanRemoval =
-	 * true) private Set<Annonce> annonce;
-	 */
 
-	
 
 }

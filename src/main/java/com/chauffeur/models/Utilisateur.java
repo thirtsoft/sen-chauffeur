@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -58,6 +59,8 @@ public class Utilisateur implements Serializable {
     private String photo = "avatar.jpg";
 
 	private boolean isActive;
+
+	private Date dateInscription;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -228,5 +231,13 @@ public class Utilisateur implements Serializable {
 
 	public void setActive(boolean active) {
 		isActive = active;
+	}
+
+	public Date getDateInscription() {
+		return dateInscription;
+	}
+
+	public void setDateInscription(Date dateInscription) {
+		this.dateInscription = dateInscription;
 	}
 }

@@ -133,6 +133,7 @@ public class AuthController implements AuthApi {
 
         utilisateur.setRoles(roles);
         utilisateur.setActive(true);
+        utilisateur.setDateInscription(new Date());
         return ResponseEntity.ok(utilisateurRepository.save(utilisateur));
 
     }

@@ -82,23 +82,8 @@ public class TarifServiceImpl implements TarifService {
                         "Aucnun Tarif avec l'Id = " + id + "n'a été trouvé")
         );
     }
-    
-    @Override
-	public TarifDto findByReference(String reference) {
-    	if (!StringUtils.hasLength(reference)) {
-            log.error("Tarif REFERENCE is null");
-        }
 
-    	Optional<Tarif> tarifOptional = tarifRepository.findTarifByReference(reference);
 
-        return Optional.of(TarifDto.fromEntityToDto(tarifOptional.get())).orElseThrow(() ->
-                new ResourceNotFoundException(
-                        "Aucnun Tarif avec l'Id = " + reference + "n'a été trouvé")
-        );
-
-	}
-
-    
     @Override
     public List<TarifDto> findAll() {
         return tarifRepository.findAll().stream()
@@ -112,16 +97,7 @@ public class TarifServiceImpl implements TarifService {
                  .map(TarifDto::fromEntityToDto)
                  .collect(Collectors.toList());
 	}
-	
-	@Override
-	public List<TarifDto> findListTarifDtoByKeyword(String keyword) {
-		if (keyword == null) {
-            log.error("Tarif not found");
-        }
-        return tarifRepository.findTarifByKeyword(keyword).stream()
-                .map(TarifDto::fromEntityToDto)
-                .collect(Collectors.toList());
-	}
+
 
 	@Override
 	public List<TarifDto> findListTarifDtoByAnnonce(Long pId) {

@@ -44,29 +44,21 @@ public class TarifController implements TarifApi {
 	}
 
 	@Override
-	public ResponseEntity<TarifDto> findByReference(String reference) {
-		return ResponseEntity.ok(tarifService.findByReference(reference));
+	public ResponseEntity<List<TarifDto>> findAll() {
+		List<TarifDto> tarifDtoList = tarifService.findAll();
+		return new ResponseEntity<>(tarifDtoList, HttpStatus.OK);
 	}
 
 	@Override
-	public List<TarifDto> findAll() {
-		return tarifService.findAll();
+	public ResponseEntity<List<TarifDto>> getdAllTarifsOrderByIdDesc() {
+		List<TarifDto> tarifDtoList = tarifService.findByTarifByIdDesc();
+		return new ResponseEntity<>(tarifDtoList, HttpStatus.OK);
 	}
 
 	@Override
-	public void delete(Long idTarif) {
-		tarifService.delete(idTarif);
-		
-	}
-
-	@Override
-	public List<TarifDto> getListTarifByKeyword(String reference) {
-		return tarifService.findListTarifDtoByKeyword("%" + reference + "%");
-	}
-
-	@Override
-	public List<TarifDto> getListTarifByAnnonce(Long pId) {
-		return tarifService.findListTarifDtoByAnnonce(pId);
+	public ResponseEntity<List<TarifDto>> getListTarifByAnnonce(Long pId) {
+		List<TarifDto> tarifDtoList = tarifService.findListTarifDtoByAnnonce(pId);
+		return new ResponseEntity<>(tarifDtoList, HttpStatus.OK);
 	}
 
 	@Override
@@ -81,10 +73,11 @@ public class TarifController implements TarifApi {
         return tarifService.findTarifByAnnonceByPageable(tarifId, pageable);
 	}
 
+
 	@Override
-	public ResponseEntity<List<TarifDto>> getdAllTarifsOrderByIdDesc() {
-		List<TarifDto> tarifDtoList = tarifService.findByTarifByIdDesc();
-	    return new ResponseEntity<>(tarifDtoList, HttpStatus.OK);
+	public void delete(Long idTarif) {
+		tarifService.delete(idTarif);
+
 	}
 
 	

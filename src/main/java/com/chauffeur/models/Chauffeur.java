@@ -70,13 +70,10 @@ public class Chauffeur implements Serializable {
 	@Column(name = "dateInscription", length = 70)
 	private Date dateInscription;
 
-//@ManyToOne
-//	@ManyToOne(cascade = CascadeType.PERSIST)
 	@ManyToOne
 	@JoinColumn(name = "permId")
 	private Permis permis;
-	
-//	@ManyToOne(cascade = CascadeType.PERSIST)
+
 	@ManyToOne
 	@JoinColumn(name = "addressId")
 	private Addresse addresse;

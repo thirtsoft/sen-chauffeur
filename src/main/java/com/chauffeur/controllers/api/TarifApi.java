@@ -32,24 +32,16 @@ public interface TarifApi {
 
 	@GetMapping(value = APP_ROOT + "/tarifs/findById/{idTarif}", produces = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<TarifDto> findById(@PathVariable("idTarif") Long idTarif);
-	
-	@GetMapping(value = APP_ROOT + "/tarifs/searchbyReference/{reference}", 
-			produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<TarifDto> findByReference(@PathVariable("reference") String reference);
 
 	@GetMapping(value = APP_ROOT + "/tarifs/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	List<TarifDto> findAll();
+	ResponseEntity<List<TarifDto>> findAll();
 	
 	@GetMapping(value = APP_ROOT + "/tarifs/searchTarifsOrderByIdDesc", produces = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<List<TarifDto>> getdAllTarifsOrderByIdDesc();
 	
-	@GetMapping(value = APP_ROOT + "/tarifs/searchTarifByKeyword", 
-			 produces = MediaType.APPLICATION_JSON_VALUE)
-	List<TarifDto> getListTarifByKeyword(@RequestParam(name = "reference") String reference);
-	
 	@GetMapping(value = APP_ROOT + "/tarifs/searchTarifsByAnnonce/{pId}", 
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	List<TarifDto> getListTarifByAnnonce(@PathVariable("pId") Long pId);
+	ResponseEntity<List<TarifDto>> getListTarifByAnnonce(@PathVariable("pId") Long pId);
 	 
 	@GetMapping(value = APP_ROOT + "/tarifs/searchTarifByPageables", 
 			 produces = MediaType.APPLICATION_JSON_VALUE)

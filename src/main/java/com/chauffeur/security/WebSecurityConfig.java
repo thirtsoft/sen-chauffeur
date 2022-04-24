@@ -20,6 +20,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import static com.chauffeur.utils.Constants.APP_ROOT;
+
 
 @SuppressWarnings("deprecation")
 @Configuration
@@ -240,6 +242,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/emails/searchAllEmailsOrderByIdDesc").permitAll()
                 .antMatchers("/**/emails/countNumberOfEmailInMonth").permitAll()
                 .antMatchers("/**/emails/delete/{idEmail}").permitAll()
+
+                .antMatchers("/**/facebooks/NumberOfPagesLikes").permitAll()
+                .antMatchers("/**/facebooks/NumberOfPagesSubscribesUsers").permitAll()
+                .antMatchers("/**/facebooks/followers").permitAll()
+                .antMatchers("/**/facebooks/Abonnees").permitAll()
 
                 .antMatchers("/**/utilisateurs/all").permitAll()
                 .antMatchers("/**/utilisateurs/searchAllUtilisateurOrderByIdDesc").permitAll()

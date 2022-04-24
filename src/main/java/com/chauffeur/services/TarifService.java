@@ -14,15 +14,11 @@ public interface TarifService {
 	TarifDto update(Long idTarif, TarifDto tarifDto);
 
 	TarifDto findById(Long id);
-	
-	TarifDto findByReference(String reference);
 
     List<TarifDto> findAll();
     
     List<TarifDto> findByTarifByIdDesc();
-    
-    List<TarifDto> findListTarifDtoByKeyword(String keyword);
-    
+
     List<TarifDto> findListTarifDtoByAnnonce(Long pId);
     
     Page<TarifDto> findTarifByPageable(Pageable pageable);

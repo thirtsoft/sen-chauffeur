@@ -14,13 +14,9 @@ import com.chauffeur.models.Tarif;
 
 @Repository
 public interface TarifRepository extends JpaRepository<Tarif, Long> {
-	
-	Optional<Tarif> findTarifByReference(String reference);
+
 	
 	List<Tarif> findTarifByOrderByIdDesc();
-	
-	@Query("select taf from Tarif taf where taf.reference like :x")
-	List<Tarif> findTarifByKeyword(@Param("x") String mc);
 	 
 	@Query("select taf from Tarif taf where taf.typeAnnonce.id =:pId")
 	List<Tarif> findTarifByAnnonce(@Param("pId") Long annonceId);
