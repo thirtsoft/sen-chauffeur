@@ -1,9 +1,11 @@
 package com.chauffeur.repository;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.chauffeur.models.Annonce;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,9 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
     BigDecimal countNumberOfRecruteurs();
     
     List<Utilisateur> findByOrderByIdDesc();
+
+    @Query("select u from Utilisateur u where month(u.dateInscription) = month(current_date) order by id Desc")
+    List<Utilisateur> findUtilisateursByOrderByIdDesc();
     
 
 }

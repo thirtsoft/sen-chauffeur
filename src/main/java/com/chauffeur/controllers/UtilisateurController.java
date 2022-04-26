@@ -71,6 +71,12 @@ public class UtilisateurController implements UtilisateurApi {
     }
 
     @Override
+    public ResponseEntity<List<UtilisateurDto>> getAllNewsRegistersOrderByIdDesc() {
+        List<UtilisateurDto> utilisateurDtoList = utilisateurService.findNewsRecruteursByOrderByIdDesc();
+        return new ResponseEntity<>(utilisateurDtoList, HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<UtilisateurDto> getUtilisateurByUsername(String username) {
         return null;
     }

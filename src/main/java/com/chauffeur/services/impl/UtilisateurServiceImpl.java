@@ -27,8 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 @Slf4j
 public class UtilisateurServiceImpl implements UtilisateurService {
-	
-	
+
     private final UtilisateurRepository utilisateurRepository;
 	
 	private final RoleRepository roleRepository;
@@ -227,6 +226,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public List<UtilisateurDto> findByOrderByIdDesc() {
         return utilisateurRepository.findByOrderByIdDesc().stream()
+                .map(UtilisateurDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UtilisateurDto> findNewsRecruteursByOrderByIdDesc() {
+        return utilisateurRepository.findUtilisateursByOrderByIdDesc().stream()
                 .map(UtilisateurDto::fromEntityToDto)
                 .collect(Collectors.toList());
     }

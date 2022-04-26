@@ -2,6 +2,7 @@ package com.chauffeur.services;
 
 import com.chauffeur.dto.UtilisateurDto;
 import com.chauffeur.enumeration.RoleName;
+import com.chauffeur.models.Utilisateur;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -35,6 +36,8 @@ public interface UtilisateurService {
     List<UtilisateurDto> findAll();
 
     List<UtilisateurDto> findByOrderByIdDesc();
+
+    List<UtilisateurDto> findNewsRecruteursByOrderByIdDesc();
 
     void delete(Long id);
 

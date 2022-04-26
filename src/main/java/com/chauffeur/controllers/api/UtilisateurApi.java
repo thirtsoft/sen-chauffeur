@@ -57,6 +57,15 @@ public interface UtilisateurApi {
     })
     ResponseEntity<List<UtilisateurDto>> getAllUtilisateursOrderByIdDesc();
 
+    @GetMapping(value = APP_ROOT + "/utilisateurs/searchAllNewsRecruteursOrderByIdDesc", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Rechercher et afficher la liste des utilisateurs par ordre décroissante",
+            notes = "Cette méthode permet de rechercher et d'afficher la liste des utilisateur par ordre décroissante")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste est"),
+            @ApiResponse(code = 400, message = "La liste est vide")
+    })
+    ResponseEntity<List<UtilisateurDto>> getAllNewsRegistersOrderByIdDesc();
+
     @GetMapping(value = APP_ROOT + "/utilisateurs/searchUtilisateurByUsername", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<UtilisateurDto> getUtilisateurByUsername(@RequestParam(value = "username") String username);
 

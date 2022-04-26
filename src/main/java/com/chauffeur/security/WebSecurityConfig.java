@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+                registry.addMapping("/**").allowedOrigins("http://localhost:4200", "https://www.sunuchauffeur.com/");
                 //	registry.addMapping("/**").allowedOrigins("https://senchauffeur.herokuapp.com");
 
 
@@ -261,6 +261,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/utilisateurs/activatedUser/*").permitAll()
                 .antMatchers("/**/utilisateurs/updateProfil").permitAll()
                 .antMatchers("/**/utilisateurs/NumbersOfRecruteurs").permitAll()
+                .antMatchers("/**/utilisateurs/searchAllNewsRecruteursOrderByIdDesc").permitAll()
 
                 .antMatchers("/**/historiqueLogins/searchHistoriqueLoginByIdDesc").permitAll()
                 .antMatchers("/**/historiqueLogins/*").permitAll()
