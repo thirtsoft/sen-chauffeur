@@ -80,7 +80,7 @@ public interface AddresseApi {
 	@ApiOperation(value = "Supprimer une Addresse par son ID",
 	    notes = "Cette méthode permet de supprimer une Addresse par son ID")
 	@ApiResponses(value = {
-	    @ApiResponse(code = 200, message = "L'Annonce a été supprimé")
+	    @ApiResponse(code = 200, message = "L'Addresse a été supprimé")
 	
 	})
 	void delete(@PathVariable("idAddresse") Long id);

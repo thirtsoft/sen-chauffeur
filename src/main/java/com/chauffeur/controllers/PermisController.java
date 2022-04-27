@@ -26,23 +26,27 @@ public class PermisController implements PermisApi{
 	
 	@Override
 	public ResponseEntity<PermisDto> save(PermisDto permisDto) {
-		return ResponseEntity.ok(permisService.save(permisDto));
+		PermisDto permisDtoResultat = permisService.save(permisDto);
+		return new ResponseEntity<>(permisDtoResultat, HttpStatus.CREATED);
 	}
 	
 	@Override
 	public ResponseEntity<PermisDto> update(Long id, PermisDto permisDto) {
 		permisDto.setId(id);
-		return ResponseEntity.ok(permisService.save(permisDto));
+		PermisDto permisDtoResultat = permisService.save(permisDto);
+		return new ResponseEntity<>(permisDtoResultat, HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<PermisDto> findById(Long id) {
-		return ResponseEntity.ok(permisService.findById(id));
+		PermisDto permisDtoResultat = permisService.findById(id);
+		return new ResponseEntity<>(permisDtoResultat, HttpStatus.OK);
 	}
 
 	@Override
-	public List<PermisDto> findAll() {
-		return permisService.findAll();
+	public ResponseEntity<List<PermisDto>> findAll() {
+		List<PermisDto> permisDtoList = permisService.findAll();
+		return new ResponseEntity<>(permisDtoList, HttpStatus.OK);
 	}
 	
 	

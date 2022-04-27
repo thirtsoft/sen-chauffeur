@@ -70,8 +70,7 @@ public interface TypeAnnonceApi {
 	    @ApiResponse(code = 200, message = "La liste des TypeAnnonces / une liste vide")
 	})
 	ResponseEntity<List<TypeAnnonceDto>> getdAllTypeAnnoncesOrderByIdDesc();
-	
-	
+
 	@DeleteMapping(value = APP_ROOT + "/typeAnnonces/delete/{idTypeAnnonce}")
 	@ApiOperation(value = "Supprimer une TypeAnnonce par ID",
 	    notes = "Cette méthode permet de supprimer un TypeAnnonce par son identifiant")

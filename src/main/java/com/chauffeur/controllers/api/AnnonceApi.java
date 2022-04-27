@@ -93,6 +93,13 @@ public interface AnnonceApi {
 	
 	@GetMapping(value = APP_ROOT + "/annonces/searchbyReference/{reference}", 
 			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Rechercher une Annonce par Reference",
+			notes = "Cette méthode permet de rechercher et d'afficher une Annonce par Reference")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "L'Annonce a été trouvé"),
+			@ApiResponse(code = 400, message = "Aucun Annonce  avec cette Reference")
+
+	})
     ResponseEntity<AnnonceDto> findByReference(@PathVariable("reference") String reference);
 
 	@GetMapping(value = APP_ROOT + "/annonces/all", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -138,6 +145,13 @@ public interface AnnonceApi {
 	
 	@GetMapping(value = APP_ROOT + "/annonces/searchAnnonceByLibelle", 
 			 produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Afficher la liste des Annonces par libelle",
+			notes = "Cette méthode permet d'afficher la liste des Annonces par libelle", responseContainer = "List<AnnonceDto>")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "La liste des Annonce a été trouvé"),
+			@ApiResponse(code = 400, message = "Aucun liste Annonce")
+
+	})
 	ResponseEntity<List<AnnonceDto>> getListAnnonceByLibelle(@RequestParam(name = "libelle") String libelle);
 	
 	@GetMapping(value = APP_ROOT + "/annonces/search5LatestAnnonceByIdDesc", 
@@ -305,7 +319,7 @@ public interface AnnonceApi {
 		    @ApiResponse(code = 400, message = "Aucun liste Annonce")
 		
 	})
-	public Page<AnnonceDto> getAnnonceByPermisPageables(
+	Page<AnnonceDto> getAnnonceByPermisPageables(
 	    		@RequestParam("id") Long permisId, 
 	    		@RequestParam(name = "page") int page,
 	    		@RequestParam(name = "size") int size);

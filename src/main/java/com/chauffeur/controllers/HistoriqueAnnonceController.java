@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,31 +27,32 @@ public class HistoriqueAnnonceController implements HistoriqueAnnonceApi {
 	@Override
 	public ResponseEntity<HistoriqueAnnonceDto> save(HistoriqueAnnonceDto historiqueAnnonceDto) {
 		HistoriqueAnnonceDto historiqueAnnonceResultDto = historiqueAnnonceService.save(historiqueAnnonceDto);
-		return ResponseEntity.ok(historiqueAnnonceResultDto);
+		return new ResponseEntity<>(historiqueAnnonceResultDto, HttpStatus.CREATED);
 	}
 
 	@Override
-	public ResponseEntity<HistoriqueAnnonceDto> update(Long idHistoriqueAnnonce,
-			HistoriqueAnnonceDto historiqueAnnonceDto) {
+	public ResponseEntity<HistoriqueAnnonceDto> update(Long idHistoriqueAnnonce, HistoriqueAnnonceDto historiqueAnnonceDto) {
 		historiqueAnnonceDto.setId(idHistoriqueAnnonce);
-		return ResponseEntity.ok(historiqueAnnonceService.save(historiqueAnnonceDto));
+		HistoriqueAnnonceDto historiqueAnnonceResultDto = historiqueAnnonceService.save(historiqueAnnonceDto);
+		return new ResponseEntity<>(historiqueAnnonceResultDto, HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<HistoriqueAnnonceDto> findById(Long idHistoriqueAnnonce) {
-		return ResponseEntity.ok(historiqueAnnonceService.findById(idHistoriqueAnnonce));
+		HistoriqueAnnonceDto historiqueAnnonceResultDto = historiqueAnnonceService.findById(idHistoriqueAnnonce);
+		return new ResponseEntity<>(historiqueAnnonceResultDto, HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<List<HistoriqueAnnonceDto>> findAll() {
 		List<HistoriqueAnnonceDto> historiqueAnnonceDtos = historiqueAnnonceService.findAll();
-		return ResponseEntity.ok(historiqueAnnonceDtos);
+		return new ResponseEntity<>(historiqueAnnonceDtos, HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<List<HistoriqueAnnonceDto>> getListHistoriqueAnnoncesOrderByIdDesc() {
 		List<HistoriqueAnnonceDto> historiqueAnnonceDtos = historiqueAnnonceService.findHistoriqueAnnonceByOrderByIdDesc();
-		return ResponseEntity.ok(historiqueAnnonceDtos);
+		return new ResponseEntity<>(historiqueAnnonceDtos, HttpStatus.OK);
 	}
 
 	@Override
@@ -63,6 +65,5 @@ public class HistoriqueAnnonceController implements HistoriqueAnnonceApi {
 		historiqueAnnonceService.delete(idHistoriqueAnnonce);
 	}
 
-	
 
 }

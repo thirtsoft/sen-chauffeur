@@ -59,18 +59,21 @@ public class ChauffeurController implements ChauffeurApi {
 	@Override
 	public ResponseEntity<ChauffeurDto> save(ChauffeurDto chauffeurDto) {
 		chauffeurDto.setDateInscription(new Date());
-		return ResponseEntity.ok(chauffeurService.save(chauffeurDto));
+		ChauffeurDto chauffeurDtoResultat = chauffeurService.save(chauffeurDto);
+		return new ResponseEntity<>(chauffeurDtoResultat, HttpStatus.CREATED);
 	}
 	
 	@Override
 	public ResponseEntity<ChauffeurDto> update(Long id, ChauffeurDto chauffeurDto) {
 		chauffeurDto.setId(id);
-		return ResponseEntity.ok(chauffeurService.save(chauffeurDto));
+		ChauffeurDto chauffeurDtoResultat = chauffeurService.save(chauffeurDto);
+		return new ResponseEntity<>(chauffeurDtoResultat, HttpStatus.OK);
 	}
 	
 	@Override
 	public ResponseEntity<ChauffeurDto> getChauffeurById(Long id) {
-		return ResponseEntity.ok(chauffeurService.findById(id));
+		ChauffeurDto chauffeurDtoResultat = chauffeurService.findById(id);
+		return new ResponseEntity<>(chauffeurDtoResultat, HttpStatus.OK);
 	}
 
 	@Override

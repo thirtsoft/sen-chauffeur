@@ -39,13 +39,15 @@ public class UtilisateurController implements UtilisateurApi {
 
     @Override
     public ResponseEntity<UtilisateurDto> save(UtilisateurDto utilisateurDto) {
-        return ResponseEntity.ok(utilisateurService.save(utilisateurDto));
+        UtilisateurDto utilisateurDtoResult = utilisateurService.save(utilisateurDto);
+        return new ResponseEntity<>(utilisateurDtoResult, HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<UtilisateurDto> updateUtilisateur(Long id, UtilisateurDto utilisateurDto) {
         utilisateurDto.setId(id);
-        return ResponseEntity.ok(utilisateurService.save(utilisateurDto));
+        UtilisateurDto utilisateurDtoResult = utilisateurService.save(utilisateurDto);
+        return new ResponseEntity<>(utilisateurDtoResult, HttpStatus.OK);
     }
 
     @Override
@@ -55,7 +57,8 @@ public class UtilisateurController implements UtilisateurApi {
 
     @Override
     public ResponseEntity<UtilisateurDto> getUtilisateurById(Long id) {
-        return ResponseEntity.ok(utilisateurService.findById(id));
+        UtilisateurDto utilisateurDtoResult = utilisateurService.findById(id);
+        return new ResponseEntity<>(utilisateurDtoResult, HttpStatus.OK);
     }
 
     @Override

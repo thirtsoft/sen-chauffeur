@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.chauffeur.dto.NewsleterDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,12 +45,15 @@ public class NotificationController implements NotificationApi {
 	
 	@Override
 	public ResponseEntity<NotificationDto> save(NotificationDto notificationDto) {
-		return ResponseEntity.ok(notificationService.save(notificationDto));
+		NotificationDto newNotificationDto = notificationService.save(notificationDto);
+		return new ResponseEntity<>(newNotificationDto, HttpStatus.CREATED);
 	}
 	
 	@Override
 	public ResponseEntity<NotificationDto> saveNoteToChauffeur(Long id, NotificationDto notificationDto) {
-		return ResponseEntity.ok(notificationService.saveNoteToChauffeur(id, notificationDto));
+		notificationDto.setCreatedDate(new Date());
+		NotificationDto newNotificationDto = notificationService.saveNoteToChauffeur(id, notificationDto);
+		return new ResponseEntity<>(newNotificationDto, HttpStatus.CREATED);
 	}
 	
 	
@@ -74,12 +78,14 @@ public class NotificationController implements NotificationApi {
 	@Override
 	public ResponseEntity<NotificationDto> update(Long id, NotificationDto notificationDto) {
 		notificationDto.setId(id);
-		return ResponseEntity.ok(notificationService.save(notificationDto));
+		NotificationDto newNotificationDto = notificationService.save(notificationDto);
+		return new ResponseEntity<>(newNotificationDto, HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<NotificationDto> findById(Long id) {
-		return ResponseEntity.ok(notificationService.findById(id));
+		NotificationDto newNotificationDto = notificationService.findById(id);
+		return new ResponseEntity<>(newNotificationDto, HttpStatus.OK);
 	}
 
 	@Override

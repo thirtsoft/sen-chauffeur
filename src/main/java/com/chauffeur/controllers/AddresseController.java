@@ -26,19 +26,22 @@ public class AddresseController implements AddresseApi {
 
 	@Override
 	public ResponseEntity<AddresseDto> save(AddresseDto addresseDto) {
-		return ResponseEntity.ok(addressService.save(addresseDto));
+		AddresseDto addresseDtoResultat = addressService.save(addresseDto);
+		return new ResponseEntity<>(addresseDtoResultat, HttpStatus.CREATED);
 	}
 	
 	@Override
 	public ResponseEntity<AddresseDto> update(Long id, AddresseDto addresseDto) {
 		addresseDto.setId(id);
-		return ResponseEntity.ok(addressService.save(addresseDto));
+		AddresseDto addresseDtoResultat = addressService.save(addresseDto);
+		return new ResponseEntity<>(addresseDtoResultat, HttpStatus.OK);
 	}
 
 
 	@Override
 	public ResponseEntity<AddresseDto> findById(Long id) {
-		return ResponseEntity.ok(addressService.findById(id));
+		AddresseDto addresseDtoResultat = addressService.findById(id);
+		return new ResponseEntity<>(addresseDtoResultat, HttpStatus.OK);
 	}
 
 	@Override

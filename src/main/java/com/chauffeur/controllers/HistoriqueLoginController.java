@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,30 +27,32 @@ public class HistoriqueLoginController implements HistoriqueLoginApi {
 	@Override
 	public ResponseEntity<HistoriqueLoginDto> save(HistoriqueLoginDto historiqueLoginDto) {
 		HistoriqueLoginDto historiqueLoginResultDto = historiqueLoginService.save(historiqueLoginDto);
-		return ResponseEntity.ok(historiqueLoginResultDto);
+		return new ResponseEntity<>(historiqueLoginResultDto, HttpStatus.CREATED);
 	}
 
 	@Override
 	public ResponseEntity<HistoriqueLoginDto> update(Long idHistoriqueLogin, HistoriqueLoginDto historiqueLoginDto) {
 		historiqueLoginDto.setId(idHistoriqueLogin);
-		return ResponseEntity.ok(historiqueLoginService.save(historiqueLoginDto));
+		HistoriqueLoginDto historiqueLoginResultDto = historiqueLoginService.save(historiqueLoginDto);
+		return new ResponseEntity<>(historiqueLoginResultDto, HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<HistoriqueLoginDto> findById(Long idHistoriqueLogin) {
-		return ResponseEntity.ok(historiqueLoginService.findById(idHistoriqueLogin));
+		HistoriqueLoginDto historiqueLoginResultDto = historiqueLoginService.findById(idHistoriqueLogin);
+		return new ResponseEntity<>(historiqueLoginResultDto, HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<List<HistoriqueLoginDto>> findAll() {
 		List<HistoriqueLoginDto> historiqueLoginDtos = historiqueLoginService.findAll();
-		return ResponseEntity.ok(historiqueLoginDtos);
+		return new ResponseEntity<>(historiqueLoginDtos, HttpStatus.OK);
 	}
 
 	@Override
-	public ResponseEntity<List<HistoriqueLoginDto>> getidHistoriqueLoginOrderByIdDesc() {
+	public ResponseEntity<List<HistoriqueLoginDto>> getAllHistoriqueLoginOrderByIdDesc() {
 		List<HistoriqueLoginDto> historiqueLoginDtos = historiqueLoginService.findHistoriqueLoginByOrderByIdDesc();
-		return ResponseEntity.ok(historiqueLoginDtos);
+		return new ResponseEntity<>(historiqueLoginDtos, HttpStatus.OK);
 	}
 
 	@Override

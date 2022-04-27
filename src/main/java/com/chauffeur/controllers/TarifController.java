@@ -29,18 +29,21 @@ public class TarifController implements TarifApi {
 
 	@Override
 	public ResponseEntity<TarifDto> save(TarifDto tarifDto) {
-		return ResponseEntity.ok(tarifService.save(tarifDto));
+		TarifDto tarifDtoResult = tarifService.save(tarifDto);
+		return new ResponseEntity<>(tarifDtoResult, HttpStatus.CREATED);
 	}
 
 	@Override
 	public ResponseEntity<TarifDto> update(Long idTarif, TarifDto tarifDto) {
 		tarifDto.setId(idTarif);
-		return ResponseEntity.ok(tarifService.save(tarifDto));
+		TarifDto tarifDtoResult = tarifService.save(tarifDto);
+		return new ResponseEntity<>(tarifDtoResult, HttpStatus.OK);
 	}
 
 	@Override
 	public ResponseEntity<TarifDto> findById(Long idTarif) {
-		return ResponseEntity.ok(tarifService.findById(idTarif));
+		TarifDto tarifDtoResult = tarifService.findById(idTarif);
+		return new ResponseEntity<>(tarifDtoResult, HttpStatus.OK);
 	}
 
 	@Override
