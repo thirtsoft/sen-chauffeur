@@ -1,6 +1,8 @@
 package com.chauffeur;
 
 
+import com.chauffeur.enumeration.RoleName;
+import com.chauffeur.models.Utilisateur;
 import com.chauffeur.repository.RoleRepository;
 import com.chauffeur.repository.UtilisateurRepository;
 import com.chauffeur.services.UtilisateurService;
@@ -83,16 +85,16 @@ public class SenChauffeurApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*
+
         Utilisateur admin = new Utilisateur();
         admin.setId(5L);
-        admin.setUsername("thir");
-        admin.setName("thir diallo");
+        admin.setUsername("Admin");
+        admin.setName("Admin diallo");
         admin.setActive(true);
         admin.setPassword(bCryptPasswordEncoder.encode("admin1234"));
         utilisateurRepository.save(admin);
-        utilisateurService.addRoleToUser("thir", RoleName.ROLE_ADMIN);
-        */
+        utilisateurService.addRoleToUser("Admin", RoleName.ROLE_ADMIN);
+
 
 
     }
