@@ -8,6 +8,8 @@ import com.restfb.json.JsonObject;
 import com.restfb.json.JsonValue;
 import com.restfb.types.Notification;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.facebook.api.*;
 import org.springframework.social.facebook.api.Facebook;
@@ -16,6 +18,10 @@ import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.List;
 
 @Service
@@ -29,7 +35,7 @@ public class FacebookServiceImpl implements FacebookService {
     @Value("${spring.social.facebook.app-secret}")
     private String facebookAppSecret;
 
-    private final String facebookAcessToken = "EAAEWdPvZA0YEBAObOqyjsHnnXKOn0CQL9oE8vCSGNujhYdmwA85cCN9XEbFmWHnxteiZCmw0OejUqF9VpiYKgvs5pyiIA0MRAJIciHlgtb3dvOSyZA3fcUxzLJigSa91K8x2eq8E6h5LZCVrFuO19kEGSdOVcwayC99JzVdEaMXdwyJwJ3H3B3c9OcKZC9TtZAuDWHNetLLzFpJcCGcEmCtNRGX3HZAx4ZCQJpUrrjAZBC2WHQCkcp8jP";
+    private final String facebookAcessToken = "EAAEWdPvZA0YEBAAIKMA5JN7ZBqYeLivVb2UWhJZBZCZBWZA4stIXcYNaC9Y6v4cq2PJ9sNB72U6iSx3PtxKKpRzhXeo5uPNGZCS3cnGEYY0UgxbZAlGD3iqZCXlD0vhAI9FiQtY01Mlz4sgouwqRswfaSdyHDCghJJZB0F5IxF2YKSSFGIlIH4ebX4AfaOdfN4x0hI66vypEErQtsciib31lLGVf1ag4KypyMR07ZBOTfHGAsjNEnmtpOpM";
 
 
     private FacebookConnectionFactory createConnection() {
@@ -66,64 +72,50 @@ public class FacebookServiceImpl implements FacebookService {
         System.out.println(valueClick.asInt());
 
         int counter = 0;
-        /*
-        for (List<Page> myFriend : postConnection) {
-            for (Page friend : myFriend) {
-                String friendId = friend.getId();
-                int nbre = friend.getNewLikeCount();
-                int follow = friend.getEngagement().getCount();
-
-                System.out.println(nbre);
-                System.out.println(follow);
-
-                counter++;
-
-            }
-        }
-        */
-
-/*
-        Page page = fbClient.fetchObject(FacebookConstants.FACBOOK_PAGEID,
-                Page.class,Parameter.with("fields", postConnection.getTotalCount()));*/
 
 
-
-
-
-/*
-        System.out.println("Comments count: " + fbClient.getJsonMapper(page.getEngagement().getCount()));
-        System.out.println("Comments count: " + page.getNewLikeCount());
-
-        int counter = 0;
-        for (int i =0; i<page.getEngagement().getCount(); i++) {
-
-                System.out.println(page.getName());
-                System.out.println(page.getNewLikeCount());
-
-                counter++;
-
-        } */
-/*
-        for (int i =0; i<page.) {
-            for (Page page1 : feedPage) {
-                System.out.println(page1.getName());
-                System.out.println(page1.getNewLikeCount());
-
-                counter++;
-            }
-        } */
         return counter;
     }
 
     @Override
-    public int countNumbersOfMentionLikes() {
-        if (this.getFacebookAcessToken() == null) {
-            log.error("Error connection");
-        }
-        PagedList<Post> postPagedList = new FacebookTemplate(this.getFacebookAcessToken()).feedOperations().getFeed();
+    public int countNumberOfPagesFollowers() throws IOException, JSONException {
+        int nombrePageFollowers = 0;
+        JSONObject json;
+        try {
+            json = new JSONObject(readUrl("https://graph.facebook.com/sunuchauffeurSn/?fields=followers_count&access_token=EAAEWdPvZA0YEBAAIKMA5JN7ZBqYeLivVb2UWhJZBZCZBWZA4stIXcYNaC9Y6v4cq2PJ9sNB72U6iSx3PtxKKpRzhXeo5uPNGZCS3cnGEYY0UgxbZAlGD3iqZCXlD0vhAI9FiQtY01Mlz4sgouwqRswfaSdyHDCghJJZB0F5IxF2YKSSFGIlIH4ebX4AfaOdfN4x0hI66vypEErQtsciib31lLGVf1ag4KypyMR07ZBOTfHGAsjNEnmtpOpM"));
+            System.out.println(json.toString());
+            System.out.println(json.get("followers_count"));
 
-        return 1;
+            nombrePageFollowers = json.getInt("followers_count");
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return nombrePageFollowers;
     }
+
+    @Override
+    public int countNumbersOfUsersWhoLikesPages() throws IOException, JSONException {
+        int nombrePageLikes = 0;
+        JSONObject json;
+        try {
+            json = new JSONObject(readUrl("https://graph.facebook.com/sunuchauffeurSn/?fields=fan_count&access_token=EAAEWdPvZA0YEBAAIKMA5JN7ZBqYeLivVb2UWhJZBZCZBWZA4stIXcYNaC9Y6v4cq2PJ9sNB72U6iSx3PtxKKpRzhXeo5uPNGZCS3cnGEYY0UgxbZAlGD3iqZCXlD0vhAI9FiQtY01Mlz4sgouwqRswfaSdyHDCghJJZB0F5IxF2YKSSFGIlIH4ebX4AfaOdfN4x0hI66vypEErQtsciib31lLGVf1ag4KypyMR07ZBOTfHGAsjNEnmtpOpM"));
+            System.out.println(json.toString());
+            System.out.println(json.get("fan_count"));
+            System.out.println(json.get("id"));
+
+            nombrePageLikes = json.getInt("fan_count");
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return nombrePageLikes;
+    }
+
 
     public String getFacebookAcessToken() {
         if (this.createConnection() == null) {
@@ -131,5 +123,24 @@ public class FacebookServiceImpl implements FacebookService {
             return null;
         }
         return facebookAcessToken;
+    }
+
+    private static String readUrl(String urlString) throws Exception {
+        BufferedReader reader = null;
+        try {
+            URL url = new URL(urlString);
+            reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            StringBuffer buffer = new StringBuffer();
+            int read;
+            char[] chars = new char[1024];
+
+            while ((read = reader.read(chars)) != -1)
+                buffer.append(chars, 0, read);
+
+            return buffer.toString();
+        } finally {
+            if (reader != null)
+                reader.close();
+        }
     }
 }

@@ -3,9 +3,12 @@ package com.chauffeur.controllers.api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.json.JSONException;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.io.IOException;
 
 import static com.chauffeur.utils.Constants.APP_ROOT;
 
@@ -19,9 +22,9 @@ public interface FacebookApi {
             @ApiResponse(code = 400, message = "Aucun liste Annonce")
 
     })
-    int getNumberOfPagesLikes();
+    int getNumberOfPagesLikes() throws IOException, JSONException;
 
-    @GetMapping(value = APP_ROOT + "/facebooks/NumberOfPagesSubscribesUsers")
+    @GetMapping(value = APP_ROOT + "/facebooks/NumberOfPagesFollowers")
     @ApiOperation(value = "Decompter le nombre total d'Abonnées",
             notes = "Cette méthode permet de compter et d'afficher le nombre total d'Abonnées sur la page sunuchauffeur")
     @ApiResponses(value = {
@@ -29,11 +32,7 @@ public interface FacebookApi {
             @ApiResponse(code = 400, message = "Aucun liste Abonnées")
 
     })
-    PagedList<Post> getNumberOfPagesSubscribesUsers();
+    int countNumberOfPagesFollowers() throws IOException, JSONException;
 
-    @GetMapping(value = APP_ROOT + "/facebooks/followers")
-    String countNumbersOfMentionLikes();
 
-    @GetMapping(value = APP_ROOT + "/facebooks/Abonnees")
-    int countNumbersOfAbonnees();
 }

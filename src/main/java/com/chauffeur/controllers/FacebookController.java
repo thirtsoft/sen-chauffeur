@@ -2,11 +2,12 @@ package com.chauffeur.controllers;
 
 import com.chauffeur.controllers.api.FacebookApi;
 import com.chauffeur.services.FacebookService;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.facebook.api.PagedList;
-import org.springframework.social.facebook.api.Post;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
 
 @RestController
 @CrossOrigin
@@ -21,22 +22,12 @@ public class FacebookController implements FacebookApi {
 
 
     @Override
-    public int getNumberOfPagesLikes() {
-        return facebookService.countNumbersOfLikes();
+    public int getNumberOfPagesLikes() throws IOException, JSONException {
+        return facebookService.countNumbersOfUsersWhoLikesPages();
     }
 
     @Override
-    public PagedList<Post> getNumberOfPagesSubscribesUsers() {
-        return facebookService.countNumbersOfSubscribesUsers();
-    }
-
-    @Override
-    public String countNumbersOfMentionLikes() {
-        return null;
-    }
-
-    @Override
-    public int countNumbersOfAbonnees() {
-        return facebookService.countNumbersOfAbonnees();
+    public int countNumberOfPagesFollowers() throws IOException, JSONException {
+        return facebookService.countNumberOfPagesFollowers();
     }
 }

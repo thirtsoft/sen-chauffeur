@@ -244,9 +244,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/emails/delete/{idEmail}").permitAll()
 
                 .antMatchers("/**/facebooks/NumberOfPagesLikes").permitAll()
-                .antMatchers("/**/facebooks/NumberOfPagesSubscribesUsers").permitAll()
-                .antMatchers("/**/facebooks/followers").permitAll()
-                .antMatchers("/**/facebooks/Abonnees").permitAll()
+                .antMatchers("/**/facebooks/NumberOfPagesFollowers").permitAll()
+
 
                 .antMatchers("/**/utilisateurs/all").permitAll()
                 .antMatchers("/**/utilisateurs/searchAllUtilisateurOrderByIdDesc").permitAll()
