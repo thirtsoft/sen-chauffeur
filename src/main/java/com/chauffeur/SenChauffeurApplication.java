@@ -2,7 +2,9 @@ package com.chauffeur;
 
 
 import com.chauffeur.enumeration.RoleName;
+import com.chauffeur.models.Chauffeur;
 import com.chauffeur.models.Utilisateur;
+import com.chauffeur.repository.ChauffeurRepository;
 import com.chauffeur.repository.RoleRepository;
 import com.chauffeur.repository.UtilisateurRepository;
 
@@ -93,7 +95,6 @@ public class SenChauffeurApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
 
         Utilisateur admin = new Utilisateur();
         admin.setId(5L);
