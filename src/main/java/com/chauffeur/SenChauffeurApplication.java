@@ -7,6 +7,8 @@ import com.chauffeur.repository.*;
 import com.chauffeur.services.EmailService;
 import com.chauffeur.services.UtilisateurService;
 import org.json.JSONException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,7 +28,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
     @Autowired
     ServletContext context;
 
-    //   private static final Logger LOG = LoggerFactory.getLogger(SenChauffeurApplication.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SenChauffeurApplication.class);
 
 
 
