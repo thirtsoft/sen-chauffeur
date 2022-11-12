@@ -12,7 +12,7 @@
     <groupId>com.transgaye</groupId>
     <artifactId>Livraison_Carburant</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+   <!-- <packaging>war</packaging>-->
     <name>SEN-CHAUFFEUR</name>
     <description>Application de mise en relation Chauffeur-Particulier</description>
     <properties>
