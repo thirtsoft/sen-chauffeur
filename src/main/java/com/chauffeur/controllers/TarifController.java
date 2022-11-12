@@ -16,8 +16,8 @@ import com.chauffeur.dto.PermisDto;
 import com.chauffeur.dto.TarifDto;
 import com.chauffeur.services.TarifService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 public class TarifController implements TarifApi {
 	
 	private TarifService tarifService;

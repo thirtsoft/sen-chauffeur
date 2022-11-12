@@ -15,7 +15,7 @@ import com.chauffeur.dto.JetonDto;
 import com.chauffeur.dto.NewsleterDto;
 import com.chauffeur.services.NewsleterService;
 
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class NewsleterController implements NewsleterApi {
 	

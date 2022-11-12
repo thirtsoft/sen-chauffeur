@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 public class FacebookController implements FacebookApi {
 
     private final FacebookService facebookService;

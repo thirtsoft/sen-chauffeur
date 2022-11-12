@@ -21,8 +21,8 @@ import com.chauffeur.services.ChauffeurService;
 import com.chauffeur.services.ReservationService;
 import com.chauffeur.services.UtilisateurService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 public class ReservationController implements ReservationApi {
 	
 	private final ReservationService reservationService;

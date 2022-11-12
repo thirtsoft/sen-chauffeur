@@ -16,7 +16,7 @@ import com.chauffeur.dto.HistoriqueAnnonceDto;
 import com.chauffeur.dto.JetonDto;
 import com.chauffeur.services.JetonService;
 
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class JetonController implements JetonApi {
 	

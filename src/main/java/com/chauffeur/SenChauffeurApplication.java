@@ -1,27 +1,34 @@
 package com.chauffeur;
 
 
+import com.chauffeur.enumeration.RoleName;
+import com.chauffeur.models.*;
+import com.chauffeur.repository.*;
+import com.chauffeur.services.EmailService;
+import com.chauffeur.services.UtilisateurService;
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.servlet.ServletContext;
 import java.io.IOException;
 
 
 @SpringBootApplication
-public class SenChauffeurApplication extends SpringBootServletInitializer implements CommandLineRunner {
+public class SenChauffeurApplication implements CommandLineRunner {
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(SenChauffeurApplication.class);
-    }
+    @Autowired
+    ServletContext context;
 
     //   private static final Logger LOG = LoggerFactory.getLogger(SenChauffeurApplication.class);
 
-    /*
+
 
     @Autowired
     private PermisRepository permisRepository;
@@ -36,23 +43,28 @@ public class SenChauffeurApplication extends SpringBootServletInitializer implem
 
     @Autowired
     private RoleRepository roleRepository;
+
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+
     @Autowired
     private UtilisateurService utilisateurService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     private EmailService emailService;
+
     @Autowired
     private JavaMailSender javaMailSender;
+
     @Autowired
     private EmailRepository emailRepository;
-    */
 
 
-    public static void main(String[] args) throws IOException, JSONException {
+
+    public static void main(String[] args) {
         SpringApplication.run(SenChauffeurApplication.class, args);
 
         //    createChauffeursDirectoryPhotoIfItDoesntExist();
@@ -106,8 +118,6 @@ public class SenChauffeurApplication extends SpringBootServletInitializer implem
 
     @Override
     public void run(String... args) throws Exception {
-
-        /*
 
         Permis p1 = permisRepository.save(new Permis(1L, "P1","Permis Poids Legere",10));
         Permis p2 = permisRepository.save(new Permis(2L, "P2","Permis Professionnel",5));
@@ -199,7 +209,7 @@ public class SenChauffeurApplication extends SpringBootServletInitializer implem
 
 
 
-         */
+
     }
 
 }

@@ -13,8 +13,8 @@ import com.chauffeur.controllers.api.HistoriqueLoginApi;
 import com.chauffeur.dto.HistoriqueLoginDto;
 import com.chauffeur.services.HistoriqueLoginService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 public class HistoriqueLoginController implements HistoriqueLoginApi {
 	
 	private HistoriqueLoginService  historiqueLoginService;

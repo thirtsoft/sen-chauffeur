@@ -13,8 +13,8 @@ import com.chauffeur.controllers.api.TypeAnnonceApi;
 import com.chauffeur.dto.TypeAnnonceDto;
 import com.chauffeur.services.TypeAnnonceService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 public class TypeAnnonceController implements TypeAnnonceApi {
 	
 	private TypeAnnonceService typeAnnonceService;

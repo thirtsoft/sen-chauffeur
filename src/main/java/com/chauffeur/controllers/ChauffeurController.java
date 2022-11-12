@@ -38,8 +38,8 @@ import com.chauffeur.services.ChauffeurService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 public class ChauffeurController implements ChauffeurApi {
 	
 	private final String chauffeurPhotosDir = "C://Users//Folio9470m//senchauffeur//chauffeur//photos//";

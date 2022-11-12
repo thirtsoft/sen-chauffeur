@@ -13,8 +13,8 @@ import com.chauffeur.dto.AddresseDto;
 import com.chauffeur.dto.AnnonceDto;
 import com.chauffeur.services.AddressService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 public class AddresseController implements AddresseApi {
 	
 	private AddressService addressService;

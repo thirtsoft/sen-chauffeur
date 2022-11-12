@@ -11,8 +11,8 @@ import com.chauffeur.controllers.api.ParticulierApi;
 import com.chauffeur.dto.ParticulierDto;
 import com.chauffeur.services.ParticulierService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 public class ParticulierController implements ParticulierApi {
 	
 	private ParticulierService particulierService;

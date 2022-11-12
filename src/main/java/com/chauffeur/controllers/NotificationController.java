@@ -22,8 +22,8 @@ import com.chauffeur.services.ChauffeurService;
 import com.chauffeur.services.NotificationService;
 import com.chauffeur.services.UtilisateurService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 public class NotificationController implements NotificationApi {
 	
 	private final NotificationService notificationService;

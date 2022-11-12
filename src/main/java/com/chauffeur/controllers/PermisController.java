@@ -13,8 +13,8 @@ import com.chauffeur.dto.ChauffeurDto;
 import com.chauffeur.dto.PermisDto;
 import com.chauffeur.services.PermisService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 public class PermisController implements PermisApi{
 	
 	private PermisService permisService;

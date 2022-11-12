@@ -23,8 +23,8 @@ import com.chauffeur.services.AnnonceService;
 import com.chauffeur.services.HistoriqueAnnonceService;
 import com.chauffeur.services.UtilisateurService;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@CrossOrigin
 public class AnnonceController implements AnnonceApi {
 	
 	private AnnonceService annonceService;
