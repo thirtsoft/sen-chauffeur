@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,10 +29,12 @@ public class Permis implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "typePermis", length = 50)
+	@NotNull
+	@Column(name = "typePermis", unique = true, length = 50)
 	private String typePermis;
 
-	@Column(name = "designation", length = 90)
+	@NotNull
+	@Column(name = "designation", unique = true,  length = 90)
 	private String designation;
 	
 	@Column(name = "validite", length = 90)

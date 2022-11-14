@@ -29,13 +29,13 @@ public class Addresse implements Serializable {
 	@Column(name = "reference", length = 50)
 	private String reference;
 
-	@Column(name = "quartier", length = 90)
+	@Column(name = "quartier", unique = true, length = 90)
 	private String quartier;
 
 	@Column(name = "rue", length = 70)
 	private String rue;
 	
-	@Column(name = "codePostal", length = 70)
+	@Column(name = "codePostal", unique = true, length = 70)
 	private String codePostal;
 
 	@Column(name = "ville", length = 50)

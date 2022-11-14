@@ -31,6 +31,18 @@ public class SenChauffeurApplication implements CommandLineRunner {
     private static final Logger LOG = LoggerFactory.getLogger(SenChauffeurApplication.class);
 
 
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
+
+    @Autowired
+    private UtilisateurService utilisateurService;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 /*
     @Autowired
     private PermisRepository permisRepository;
@@ -121,6 +133,27 @@ public class SenChauffeurApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        Utilisateur kals = new Utilisateur();
+        kals.setId(6L);
+        kals.setUsername("Kalidou");
+        kals.setName("Kalidou Badji");
+        kals.setEmail("kaliloubadji@yahoo.fr");
+        kals.setActive(true);
+        kals.setPassword(bCryptPasswordEncoder.encode("sunuchauffeur@2022"));
+        utilisateurRepository.save(kals);
+        utilisateurService.addRoleToUser("Kalidou", RoleName.ROLE_MANAGER);
+
+
+        Utilisateur laye = new Utilisateur();
+        laye.setId(7L);
+        laye.setUsername("Abdoulaye");
+        laye.setName("Abdoulaye Kanel");
+        kals.setEmail("kalel.abdoulaye@gmail.com");
+        laye.setActive(true);
+        laye.setPassword(bCryptPasswordEncoder.encode("sunuchauffeur@2022"));
+        utilisateurRepository.save(laye);
+        utilisateurService.addRoleToUser("Abdoulaye", RoleName.ROLE_MANAGER);
 
         /*
         Permis p1 = permisRepository.save(new Permis(1L, "P1","Permis Poids Legere",10));
