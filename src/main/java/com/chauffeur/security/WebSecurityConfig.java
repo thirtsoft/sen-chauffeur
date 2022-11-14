@@ -16,11 +16,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @SuppressWarnings("deprecation")
@@ -59,46 +56,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    /*
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("*")
-                        .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
-                        .allowedHeaders("*")
-                        .maxAge(3600L);
-                //       .allowedOrigins("http://localhost:4200", "https://www.sunuchauffeur.com/");
-                //	registry.addMapping("/**").allowedOrigins("https://senchauffeur.herokuapp.com");
-
-
-            }
-        };
-    }
-    */
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://sunuchauffeur.com", "http://localhost:4200"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-
-        return source;
-    }
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
+        http.cors().and().csrf().disable().
+                authorizeRequests()
                 .antMatchers("/**/auth/signUp").permitAll()
                 .antMatchers("/**/auth/registerUser").permitAll()
                 .antMatchers("/**/auth/authenticated").permitAll()
@@ -193,7 +154,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/tarifs/searchTarifByPageables/**").permitAll()
                 .antMatchers("/**/tarifs/searchTarifByAnnoncePageables/**").permitAll()
 
-
                 .antMatchers("/**/jetons/searchJetonsByIdDesc").permitAll()
                 .antMatchers("/**/jetons/searchJetonsByCustomerId/*").permitAll()
                 .antMatchers("/**/jetons/findById/*").permitAll()
@@ -220,10 +180,51 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/utilisateurs/NumbersOfRecruteurs").permitAll()
                 .antMatchers("/**/utilisateurs/searchAllNewsRecruteursOrderByIdDesc").permitAll()
 
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        //  .allowedOrigins("**")
+                        //   .allowedOrigins("http://localhost:4200")
+                        //  .allowedOrigins("https://alamine.herokuapp.com")
+                        .allowedOrigins("https://sunuchauffeur.com")
+                        // .allowedOrigins("https://librairiealamine.com")
+                        .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+                        .maxAge(3600L)
+                        .allowedHeaders("*")
+                        .exposedHeaders("Authorization")
+                        .allowCredentials(true);
+
+
+            }
+        };
+    }
+
+
+    /*
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("https://sunuchauffeur.com", "http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
+    }
+
+    */
 
 
 }
