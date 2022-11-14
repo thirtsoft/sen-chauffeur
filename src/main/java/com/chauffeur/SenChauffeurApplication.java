@@ -31,9 +31,10 @@ public class SenChauffeurApplication implements CommandLineRunner {
     private static final Logger LOG = LoggerFactory.getLogger(SenChauffeurApplication.class);
 
 
-
+/*
     @Autowired
     private PermisRepository permisRepository;
+
     @Autowired
     private ChauffeurRepository chauffeurRepository;
 
@@ -65,7 +66,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
     private EmailRepository emailRepository;
 
 
-
+    */
     public static void main(String[] args) {
         SpringApplication.run(SenChauffeurApplication.class, args);
 
@@ -121,6 +122,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        /*
         Permis p1 = permisRepository.save(new Permis(1L, "P1","Permis Poids Legere",10));
         Permis p2 = permisRepository.save(new Permis(2L, "P2","Permis Professionnel",5));
         Permis p3 = permisRepository.save(new Permis(3L, "P3","Permis Tracteur",15));
@@ -211,7 +213,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
 
 
 
-
+*/
     }
 
 }
