@@ -134,6 +134,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        /*
         Utilisateur kals = new Utilisateur();
         kals.setId(6L);
         kals.setUsername("Kalidou");
@@ -154,6 +155,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
         laye.setPassword(bCryptPasswordEncoder.encode("sunuchauffeur@2022"));
         utilisateurRepository.save(laye);
         utilisateurService.addRoleToUser("Abdoulaye", RoleName.ROLE_MANAGER);
+        */
 
         /*
         Permis p1 = permisRepository.save(new Permis(1L, "P1","Permis Poids Legere",10));
