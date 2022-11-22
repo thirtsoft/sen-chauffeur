@@ -1,36 +1,26 @@
 package com.chauffeur;
 
 
-import com.chauffeur.enumeration.RoleName;
-import com.chauffeur.models.*;
-import com.chauffeur.repository.*;
-import com.chauffeur.services.EmailService;
+import com.chauffeur.repository.RoleRepository;
+import com.chauffeur.repository.UtilisateurRepository;
 import com.chauffeur.services.UtilisateurService;
-import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.ServletContext;
-import java.io.IOException;
 
 
 @SpringBootApplication
 public class SenChauffeurApplication implements CommandLineRunner {
 
+    private static final Logger LOG = LoggerFactory.getLogger(SenChauffeurApplication.class);
     @Autowired
     ServletContext context;
-
-    private static final Logger LOG = LoggerFactory.getLogger(SenChauffeurApplication.class);
-
-
     @Autowired
     private RoleRepository roleRepository;
 
@@ -43,42 +33,42 @@ public class SenChauffeurApplication implements CommandLineRunner {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-/*
-    @Autowired
-    private PermisRepository permisRepository;
+    /*
+        @Autowired
+        private PermisRepository permisRepository;
 
-    @Autowired
-    private ChauffeurRepository chauffeurRepository;
+        @Autowired
+        private ChauffeurRepository chauffeurRepository;
 
-    @Autowired
-    private AddresseRepository addresseRepository;
+        @Autowired
+        private AddresseRepository addresseRepository;
 
-    @Autowired
-    private TarifRepository tarifRepository;
+        @Autowired
+        private TarifRepository tarifRepository;
 
-    @Autowired
-    private RoleRepository roleRepository;
+        @Autowired
+        private RoleRepository roleRepository;
 
-    @Autowired
-    private UtilisateurRepository utilisateurRepository;
+        @Autowired
+        private UtilisateurRepository utilisateurRepository;
 
-    @Autowired
-    private UtilisateurService utilisateurService;
+        @Autowired
+        private UtilisateurService utilisateurService;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+        @Autowired
+        private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private EmailService emailService;
+        @Autowired
+        private EmailService emailService;
 
-    @Autowired
-    private JavaMailSender javaMailSender;
+        @Autowired
+        private JavaMailSender javaMailSender;
 
-    @Autowired
-    private EmailRepository emailRepository;
+        @Autowired
+        private EmailRepository emailRepository;
 
 
-    */
+        */
     public static void main(String[] args) {
         SpringApplication.run(SenChauffeurApplication.class, args);
 
@@ -135,7 +125,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-
+/*
         Utilisateur kals = new Utilisateur();
         kals.setUsername("Kalilou");
         kals.setName("Kalilou Badji");
@@ -144,6 +134,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
         kals.setPassword(bCryptPasswordEncoder.encode("sunuchauffeur@2022"));
         utilisateurRepository.save(kals);
         utilisateurService.addRoleToUser("Kalilou", RoleName.ROLE_MANAGER);
+        */
 
         /*
 
