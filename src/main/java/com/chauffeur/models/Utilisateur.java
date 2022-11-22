@@ -67,8 +67,11 @@ public class Utilisateur implements Serializable {
 
 	private boolean isActive;
 
+	/*
 	@Column(name = "enabled")
 	private boolean enabled;
+	*/
+
 
 	private Date dateInscription;
 
@@ -245,14 +248,6 @@ public class Utilisateur implements Serializable {
 
 	public void setActive(boolean active) {
 		isActive = active;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
 	}
 
 	public Date getDateInscription() {
