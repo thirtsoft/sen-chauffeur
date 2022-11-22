@@ -13,7 +13,8 @@ import com.chauffeur.dto.AddresseDto;
 import com.chauffeur.dto.AnnonceDto;
 import com.chauffeur.services.AddressService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://sunuchauffeur.com")
 @RestController
 public class AddresseController implements AddresseApi {
 	

@@ -31,15 +31,13 @@ public interface AuthApi {
     ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginForm);
 
 
-    @PostMapping(value = APP_ROOT + "/auth/registerUser", 
-    		consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Créer compte utilisateure",
-    notes = "Cette méthode permet à un utilisateur de Créer un compte",
-	       response = EmailDto.class)
+	@PostMapping(value = APP_ROOT + "/auth/signUp", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Create Account",
+			notes = "Cette méthode permet à un utilisateur de créer un compte une Category", response = SignUpForm.class)
 	@ApiResponses(value = {
-	       @ApiResponse(code = 201, message = "compte a été crée"),
-	       @ApiResponse(code = 400, message = "Aucun compte  crée")
+			@ApiResponse(code = 201, message = "Le compte a été crée"),
+			@ApiResponse(code = 400, message = "Aucun Compte  crée / modifié")
 	})
-    ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpForm);
+	ResponseEntity<?> signUp(@Valid @RequestBody SignUpForm signUpForm);
 
 }

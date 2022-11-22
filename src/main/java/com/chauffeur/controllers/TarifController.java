@@ -16,7 +16,8 @@ import com.chauffeur.dto.PermisDto;
 import com.chauffeur.dto.TarifDto;
 import com.chauffeur.services.TarifService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://sunuchauffeur.com")
 @RestController
 public class TarifController implements TarifApi {
 	

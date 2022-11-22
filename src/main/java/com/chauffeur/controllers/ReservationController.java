@@ -21,7 +21,8 @@ import com.chauffeur.services.ChauffeurService;
 import com.chauffeur.services.ReservationService;
 import com.chauffeur.services.UtilisateurService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://sunuchauffeur.com")
 @RestController
 public class ReservationController implements ReservationApi {
 	

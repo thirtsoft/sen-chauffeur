@@ -13,7 +13,8 @@ import com.chauffeur.controllers.api.HistoriqueAnnonceApi;
 import com.chauffeur.dto.HistoriqueAnnonceDto;
 import com.chauffeur.services.HistoriqueAnnonceService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://sunuchauffeur.com")
 @RestController
 public class HistoriqueAnnonceController implements HistoriqueAnnonceApi {
 	

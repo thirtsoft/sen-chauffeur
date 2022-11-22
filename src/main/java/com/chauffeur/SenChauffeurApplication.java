@@ -134,27 +134,39 @@ public class SenChauffeurApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*
+
+
         Utilisateur kals = new Utilisateur();
-        kals.setId(6L);
-        kals.setUsername("Kalidou");
-        kals.setName("Kalidou Badji");
+        kals.setUsername("Kalilou");
+        kals.setName("Kalilou Badji");
         kals.setEmail("kaliloubadji@yahoo.fr");
         kals.setActive(true);
         kals.setPassword(bCryptPasswordEncoder.encode("sunuchauffeur@2022"));
         utilisateurRepository.save(kals);
-        utilisateurService.addRoleToUser("Kalidou", RoleName.ROLE_MANAGER);
+        utilisateurService.addRoleToUser("Kalilou", RoleName.ROLE_MANAGER);
 
+        /*
 
         Utilisateur laye = new Utilisateur();
         laye.setId(7L);
         laye.setUsername("Abdoulaye");
         laye.setName("Abdoulaye Kanel");
-        kals.setEmail("kalel.abdoulaye@gmail.com");
+        laye.setEmail("kalel.abdoulaye@gmail.com");
         laye.setActive(true);
         laye.setPassword(bCryptPasswordEncoder.encode("sunuchauffeur@2022"));
         utilisateurRepository.save(laye);
         utilisateurService.addRoleToUser("Abdoulaye", RoleName.ROLE_MANAGER);
+
+        Utilisateur admin = new Utilisateur();
+        admin.setId(8L);
+        admin.setUsername("Admin");
+        admin.setName("Admin Admin");
+        admin.setEmail("admin@gmail.com");
+        admin.setActive(true);
+        admin.setPassword(bCryptPasswordEncoder.encode("admin1234"));
+        utilisateurRepository.save(admin);
+        utilisateurService.addRoleToUser("Admin", RoleName.ROLE_ADMIN);
+
         */
 
         /*

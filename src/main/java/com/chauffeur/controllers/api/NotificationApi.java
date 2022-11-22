@@ -129,7 +129,7 @@ public interface NotificationApi {
 	})
 	ResponseEntity<List<NotificationDto>> getTop4ByOrderByCreatedDateDescByProductId(@PathVariable("idChauff") Long id);
 	
-	@GetMapping(value = APP_ROOT + "/notifications/countNumberOfNotificationByProductId/{idChauff}",
+	@GetMapping(value = APP_ROOT + "/notifications/countNumberOfNotificationByChauffeurId/{idChauff}",
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Décompter le nombre de Notifications d'un chauffeur",
 			notes = "Cette méthode permet de compter et d'afficher le nombre total de Notifications d'un chauffeur",

@@ -8,6 +8,7 @@ import com.chauffeur.exceptions.ResourceNotFoundException;
 import com.chauffeur.message.request.LoginForm;
 import com.chauffeur.message.request.SignUpForm;
 import com.chauffeur.message.response.JwtResponse;
+import com.chauffeur.message.response.ResponseMessage;
 import com.chauffeur.models.Role;
 import com.chauffeur.models.Utilisateur;
 import com.chauffeur.repository.RoleRepository;
@@ -16,6 +17,7 @@ import com.chauffeur.security.jwt.JwtsProvider;
 import com.chauffeur.security.service.UserPrinciple;
 import com.chauffeur.services.HistoriqueLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,12 +25,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://sunuchauffeur.com")
 @RestController
 public class AuthController implements AuthApi {
 
@@ -81,40 +86,38 @@ public class AuthController implements AuthApi {
                 roles));
     }
 
-    @Override
-    public ResponseEntity<?> registerUser(SignUpForm signUpForm) {
-        if (utilisateurRepository.existsByUsername(signUpForm.getUsername())) {
-            throw new ResourceNotFoundException("Fail -> Error: Username is already taken!");
+    public ResponseEntity<?> signUp(SignUpForm signUpRequest) {
+        if (utilisateurRepository.existsByUsername(signUpRequest.getUsername())) {
+            return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
+                    HttpStatus.BAD_REQUEST);
         }
-        if (utilisateurRepository.existsByEmail(signUpForm.getEmail())) {
-            throw new ResourceNotFoundException("Error: Email is already in use!");
-        }
-        // Create new user's account
-        Utilisateur utilisateur = new Utilisateur(
-                signUpForm.getName(),
-                signUpForm.getUsername(),
-                signUpForm.getEmail(),
-                encoder.encode(signUpForm.getPassword()
-                )
-        );
 
-        String[] strRoles = signUpForm.getRoles();
+        if (utilisateurRepository.existsByEmail(signUpRequest.getEmail())) {
+            return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        // Creating user's account
+        Utilisateur user = new Utilisateur(signUpRequest.getName(),
+                signUpRequest.getUsername(),
+                signUpRequest.getEmail(),
+                encoder.encode(signUpRequest.getPassword()));
+
+        // Set<String> strRoles = signUpRequest.getRole();
+        String[] strRoles = signUpRequest.getRoles();
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
             Role userRole = (roleRepository.findByName(RoleName.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
             roles.add(userRole);
+
         }
 
         for (String role : strRoles) {
             switch (role.toLowerCase()) {
                 case "admin":
                     roles.add(roleRepository.findByName(RoleName.ROLE_ADMIN).get());
-                    break;
-
-                case "gestionnaire":
-                    roles.add(roleRepository.findByName(RoleName.ROLE_GESTIONNAIRE).get());
                     break;
 
                 case "manager":
@@ -126,15 +129,17 @@ public class AuthController implements AuthApi {
                     break;
 
                 default:
-                    return ResponseEntity.badRequest().body("Specified role not found");
-
+                    roles.add(roleRepository.findByName(RoleName.ROLE_USER).get());
             }
         }
 
-        utilisateur.setRoles(roles);
-        utilisateur.setActive(true);
-        utilisateur.setDateInscription(new Date());
-        return ResponseEntity.ok(utilisateurRepository.save(utilisateur));
+        user.setRoles(roles);
+        user.setActive(true);
+        user.setDateInscription(new Date());
+
+        utilisateurRepository.save(user);
+
+        return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.CREATED);
 
     }
 

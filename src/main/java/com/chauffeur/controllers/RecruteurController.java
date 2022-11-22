@@ -12,7 +12,8 @@ import com.chauffeur.controllers.api.RecruteurApi;
 import com.chauffeur.dto.RecruteurDto;
 import com.chauffeur.services.RecruteurService;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://sunuchauffeur.com")
 @RestController
 public class RecruteurController implements RecruteurApi {
 	
