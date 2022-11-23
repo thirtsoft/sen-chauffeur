@@ -116,13 +116,19 @@ public class ChauffeurController implements ChauffeurApi {
 		
 		if (cvChauffeur != null && !cvChauffeur.isEmpty()) {
 			String fileCV = cvChauffeur.getOriginalFilename();
-	        String newFileName = FilenameUtils.getBaseName(fileCV) + "." + FilenameUtils.getExtension(fileCV);
-	        File serverFile = new File(context.getRealPath("/Chauffeurs/cvs/" + File.separator + newFileName));
+			String filename = cvChauffeur.getOriginalFilename();
+			String newFileName = FilenameUtils.getBaseName(filename) + "." + FilenameUtils.getExtension(filename);
+			File serverFile = new File(context.getRealPath("/Chauffeurs/cvs/" + File.separator + newFileName));
 			FileUtils.writeByteArrayToFile(serverFile, cvChauffeur.getBytes());
+
+			chauffeurDto.setCvChauffeur(fileCV);
 			
         }
-		
-		return ResponseEntity.ok(chauffeurService.save(chauffeurDto));
+
+		ChauffeurDto chauffeurDtoResult = chauffeurService.save(chauffeurDto);
+
+		return new ResponseEntity<>(chauffeurDtoResult, HttpStatus.CREATED);
+
 	}
 	
 	@Override

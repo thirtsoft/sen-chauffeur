@@ -23,13 +23,14 @@ import lombok.NoArgsConstructor;
  * @author Folio9470m
  *
  */
-@Entity
-@Table(name = "annonce", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "reference")
-})
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "annonce", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "reference")
+})
 public class Annonce implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -38,7 +39,7 @@ public class Annonce implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "reference", length = 50)
+	@Column(name = "reference", unique = true, length = 50)
 	private String reference;
 	
 	@Column(name = "libelle", length = 200)

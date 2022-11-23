@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/auth/authenticated").permitAll()
 
                 .antMatchers("/**/chauffeurs/create").permitAll()
-                .antMatchers("/**/chauffeurs/createWithFiles/***").permitAll()
+                .antMatchers("/**/chauffeurs/createWithFiles").permitAll()
                 .antMatchers("/**/chauffeurs/createWithFilesInFolder").permitAll()
                 .antMatchers("/**/chauffeurs/update/*").permitAll()
                 .antMatchers("/**/chauffeurs/all").permitAll()
@@ -123,7 +123,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/annonces/findAnnonceByCustomerId/{userId}").permitAll()
                 .antMatchers("/**/annonces/all").permitAll()
                 .antMatchers("/**/annonces/searchAnnonceOrderByIdDesc").permitAll()
-                .antMatchers("/**/annonces/searchbyReference/**").permitAll()
+                .antMatchers("/**/annonces/searchbyReference/{reference}").permitAll()
                 .antMatchers("/**/annonces/searchAnnonceByKeyword/**").permitAll()
                 .antMatchers("/**/annonces/searchAnnonceByLibelle/**").permitAll()
                 .antMatchers("/**/annonces/search5LatestAnnonceByIdDesc").permitAll()
@@ -260,8 +260,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         //  .allowedOrigins("**")
-                        .allowedOrigins("https://sunuchauffeur.com")
-                       // .allowedOrigins("http://localhost:4200")
+                       // .allowedOrigins("https://sunuchauffeur.com")
+                        .allowedOrigins("http://localhost:4200")
                         .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                         .maxAge(3600L)
                         .allowedHeaders("*")

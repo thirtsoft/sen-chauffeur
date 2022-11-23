@@ -55,7 +55,7 @@ public class AnnonceServiceImpl implements AnnonceService {
         }
 
         AnnonceDto annonceDtoResult = AnnonceDto.fromEntityToDto(annonce.get());
-        annonceDtoResult.setReference(annonceDto.getReference());
+    //    annonceDtoResult.setReference(annonceDto.getReference());
         annonceDtoResult.setLibelle(annonceDto.getLibelle());
         annonceDtoResult.setTime(annonceDto.getTime());
         annonceDtoResult.setProExperience(annonceDto.getProExperience());
@@ -114,7 +114,7 @@ public class AnnonceServiceImpl implements AnnonceService {
             log.error("Annonce REFERENCE is null");
         }
 
-        Optional<Annonce> annonce = annonceRepository.findAnnonceByReference(reference);
+        Optional<Annonce> annonce = annonceRepository.findByReference(reference);
 
         return Optional.of(AnnonceDto.fromEntityToDto(annonce.get())).orElseThrow(() ->
                 new ResourceNotFoundException(

@@ -16,7 +16,7 @@ import com.chauffeur.models.Annonce;
 @Repository
 public interface AnnonceRepository extends JpaRepository<Annonce, Long> {
 	
-	Optional<Annonce> findAnnonceByReference(String reference);
+	Optional<Annonce> findByReference(String reference);
 	
 	@Query("select count(p) from Annonce p ")
 	BigDecimal countNumberOfAnnonces();

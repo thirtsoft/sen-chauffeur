@@ -1,8 +1,10 @@
 package com.chauffeur;
 
 
-import com.chauffeur.repository.RoleRepository;
-import com.chauffeur.repository.UtilisateurRepository;
+import com.chauffeur.enumeration.RoleName;
+import com.chauffeur.models.*;
+import com.chauffeur.repository.*;
+import com.chauffeur.services.EmailService;
 import com.chauffeur.services.UtilisateurService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.ServletContext;
@@ -21,23 +24,11 @@ public class SenChauffeurApplication implements CommandLineRunner {
     private static final Logger LOG = LoggerFactory.getLogger(SenChauffeurApplication.class);
     @Autowired
     ServletContext context;
-    @Autowired
-    private RoleRepository roleRepository;
 
     @Autowired
-    private UtilisateurRepository utilisateurRepository;
+    private PermisRepository permisRepository;
 
     @Autowired
-    private UtilisateurService utilisateurService;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    /*
-        @Autowired
-        private PermisRepository permisRepository;
-
-        @Autowired
         private ChauffeurRepository chauffeurRepository;
 
         @Autowired
@@ -68,7 +59,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
         private EmailRepository emailRepository;
 
 
-        */
+
     public static void main(String[] args) {
         SpringApplication.run(SenChauffeurApplication.class, args);
 
@@ -124,42 +115,6 @@ public class SenChauffeurApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-
-/*
-        Utilisateur kals = new Utilisateur();
-        kals.setUsername("Kalilou");
-        kals.setName("Kalilou Badji");
-        kals.setEmail("kaliloubadji@yahoo.fr");
-        kals.setActive(true);
-        kals.setPassword(bCryptPasswordEncoder.encode("sunuchauffeur@2022"));
-        utilisateurRepository.save(kals);
-        utilisateurService.addRoleToUser("Kalilou", RoleName.ROLE_MANAGER);
-        */
-
-        /*
-
-        Utilisateur laye = new Utilisateur();
-        laye.setId(7L);
-        laye.setUsername("Abdoulaye");
-        laye.setName("Abdoulaye Kanel");
-        laye.setEmail("kalel.abdoulaye@gmail.com");
-        laye.setActive(true);
-        laye.setPassword(bCryptPasswordEncoder.encode("sunuchauffeur@2022"));
-        utilisateurRepository.save(laye);
-        utilisateurService.addRoleToUser("Abdoulaye", RoleName.ROLE_MANAGER);
-
-        Utilisateur admin = new Utilisateur();
-        admin.setId(8L);
-        admin.setUsername("Admin");
-        admin.setName("Admin Admin");
-        admin.setEmail("admin@gmail.com");
-        admin.setActive(true);
-        admin.setPassword(bCryptPasswordEncoder.encode("admin1234"));
-        utilisateurRepository.save(admin);
-        utilisateurService.addRoleToUser("Admin", RoleName.ROLE_ADMIN);
-
-        */
-
         /*
         Permis p1 = permisRepository.save(new Permis(1L, "P1","Permis Poids Legere",10));
         Permis p2 = permisRepository.save(new Permis(2L, "P2","Permis Professionnel",5));
@@ -180,6 +135,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
         Addresse ad12 = addresseRepository.save(new Addresse(12L, "Ked","Kedougou","Rue 4","4M","Kedougou","SENEGAL"));
         Addresse ad13 = addresseRepository.save(new Addresse(13L, "Mat","Matam","Rue 4","25S","Dakar","SENEGAL"));
         Addresse ad14 = addresseRepository.save(new Addresse(14L, "Diour","Diourbel","Rue 4","4M","Dakar","SENEGAL"));
+
         Chauffeur ch1 = new Chauffeur(1L, "Chauffeur Personnel","tairou","diallo","M","thirdiallo@gmail.com","779440310","3ans",600000,
                 "Dk-Zig-Thies","Full-Time", true,"cv1.pdf", "photo1.jpg",p1, ad1);
         Chauffeur ch2 = new Chauffeur(2L, "Chauffeur particulier","Ablaye","Kanel","M","ablaye@gmail.com","777440310","7ans",600000,
@@ -240,8 +196,26 @@ public class SenChauffeurApplication implements CommandLineRunner {
         roleRepository.save(roleManager);
         roleRepository.save(adminRole);
 
+
+        Utilisateur kals = new Utilisateur();
+        kals.setUsername("Kalilou");
+        kals.setName("Kalilou Badji");
+        kals.setEmail("kaliloubadji@yahoo.fr");
+        kals.setActive(true);
+        kals.setPassword(bCryptPasswordEncoder.encode("sunuchauffeur@2022"));
+        utilisateurRepository.save(kals);
+        utilisateurService.addRoleToUser("Kalilou", RoleName.ROLE_MANAGER);
+
+        Utilisateur laye = new Utilisateur();
+        laye.setUsername("Abdoulaye");
+        laye.setName("Abdoulaye Kanel");
+        laye.setEmail("kalel.abdoulaye@gmail.com");
+        laye.setActive(true);
+        laye.setPassword(bCryptPasswordEncoder.encode("sunuchauffeur@2022"));
+        utilisateurRepository.save(laye);
+        utilisateurService.addRoleToUser("Abdoulaye", RoleName.ROLE_MANAGER);
+
         Utilisateur admin = new Utilisateur();
-        admin.setId(5L);
         admin.setUsername("Admin");
         admin.setName("Admin diallo");
         admin.setActive(true);
@@ -249,9 +223,11 @@ public class SenChauffeurApplication implements CommandLineRunner {
         utilisateurRepository.save(admin);
         utilisateurService.addRoleToUser("Admin", RoleName.ROLE_ADMIN);
 
+         */
 
 
-*/
+
+
     }
 
 }
