@@ -9,7 +9,8 @@ import com.chauffeur.models.Utilisateur;
 import com.chauffeur.services.AnnonceService;
 import com.chauffeur.services.HistoriqueAnnonceService;
 import com.chauffeur.services.UtilisateurService;
-import com.chauffeur.utils.GenerateValue;
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -45,10 +46,15 @@ public class AnnonceController implements AnnonceApi {
         this.historiqueAnnonceService = historiqueAnnonceService;
     }
 
+    public static long generateReference() {
+        final String FORMAT = "yyyyMMddHHmmss";
+        return Long.parseLong(DateTimeFormat.forPattern(FORMAT).print(LocalDateTime.now()));
+    }
+
     @Override
     public ResponseEntity<AnnonceDto> save(AnnonceDto annonceDto) {
         annonceDto.setStatus(String.valueOf(StatusAnnonce.ENCOURS));
-        annonceDto.setReference(GenerateValue.generateReference());
+        annonceDto.setReference(generateReference());
         annonceDto.setDateCandidature(new Date());
 
         AnnonceDto newAnnonceDto = annonceService.save(annonceDto);
@@ -73,7 +79,7 @@ public class AnnonceController implements AnnonceApi {
         annonceDto.setUtilisateurDto(UtilisateurDto.fromEntityToDto(utilisateur));
 
         annonceDto.setStatus(String.valueOf(StatusAnnonce.ENCOURS));
-        annonceDto.setReference(GenerateValue.generateReference());
+        annonceDto.setReference(generateReference());
         annonceDto.setDateCandidature(new Date());
 
         AnnonceDto annonceDtoResult = annonceService.save(annonceDto);
@@ -136,7 +142,6 @@ public class AnnonceController implements AnnonceApi {
         return new ResponseEntity<>(annonceDTOResult, HttpStatus.OK);
     }
 
-
     @Override
     public ResponseEntity<List<AnnonceDto>> getAllAnnonces() {
         List<AnnonceDto> annonceDtos = annonceService.findAll();
@@ -161,7 +166,6 @@ public class AnnonceController implements AnnonceApi {
         return new ResponseEntity<>(annonceDtoList, HttpStatus.OK);
     }
 
-
     @Override
     public ResponseEntity<List<AnnonceDto>> getListArticleByKeyword(String keyword) {
         List<AnnonceDto> annonceDtoList = annonceService.findListAnnonceByKeyword("%" + keyword + "%");
@@ -185,7 +189,6 @@ public class AnnonceController implements AnnonceApi {
         List<AnnonceDto> annonceDtoList = annonceService.find6LatestValidatedRecordsByOrderByIdDesc();
         return new ResponseEntity<>(annonceDtoList, HttpStatus.OK);
     }
-
 
     @Override
     public ResponseEntity<List<AnnonceDto>> getAnnoncesByUserOrderByIdDesc(Long id) {
