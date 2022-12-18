@@ -19,6 +19,8 @@ import javax.servlet.ServletContext;
 @SpringBootApplication
 public class SenChauffeurApplication implements CommandLineRunner {
 
+    /*
+
     private static final Logger LOG = LoggerFactory.getLogger(SenChauffeurApplication.class);
     @Autowired
     ServletContext context;
@@ -46,7 +48,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-/*
+
         @Autowired
         private EmailService emailService;
 
@@ -114,6 +116,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        /*
 
         Permis p1 = permisRepository.save(new Permis(1L, "P1", "Permis Poids Legere", 10));
         Permis p2 = permisRepository.save(new Permis(2L, "P2", "Permis Professionnel", 5));
@@ -231,11 +234,14 @@ public class SenChauffeurApplication implements CommandLineRunner {
         admin.setId(3L);
         admin.setUsername("Admin");
         admin.setName("Admin diallo");
+        admin.setEmail("admin@gmail.com");
         admin.setActive(true);
         admin.setPassword(bCryptPasswordEncoder.encode("admin1234"));
         utilisateurRepository.save(admin);
         utilisateurService.addRoleToUser("Admin", RoleName.ROLE_ADMIN);
 
+
+        */
 
     }
 
