@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -16,29 +18,35 @@ import lombok.NoArgsConstructor;
 public class ChauffeurDto {
 	
 	private Long id;
-	
+
+	@NotNull(message = "reference shouldn't be null")
 	private String reference;
-	
+
+	@NotNull(message = "firstname shouldn't be null")
 	private String firstName;
 
+	@NotNull(message = "lastname shouldn't be null")
 	private String lastName;
 	
 	private String sexe;
-	
+
+	@NotNull(message = "disponibility shouldn't be null")
 	private String disponibity;
 	
 	private boolean selected;
 
 	private String email;
-	
+
+	@NotNull(message = "phoneChauffeur shouldn't be null")
 	private String phoneChauffeur;
-	
+
+	@NotNull(message = "nbreAnneeExperience shouldn't be null")
 	private String nbreAnneeExperience;
 
 	private double pretentionSalaire;
 	
 	private String cvChauffeur;
-	
+
 	private String mobilite;
 
 	private String photoChauffeur;

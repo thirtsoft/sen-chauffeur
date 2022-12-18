@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -25,7 +26,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-        prePostEnabled = true
+        prePostEnabled = true,
+        securedEnabled = true,
+        jsr250Enabled = true
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -57,11 +60,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity webSecurity) throws Exception {
+        webSecurity.ignoring().antMatchers("/**");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests()
+        http.csrf().disable()
+                        .cors()
+                                .disable()
+                                        .authorizeRequests()
 
                 .antMatchers("/**/auth/signUp").permitAll()
                 .antMatchers("/**/auth/authenticated").permitAll()
@@ -175,7 +183,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/notifications/update/{idNotification}").permitAll()
                 .antMatchers("/**/notifications/countNumberOfNotification").permitAll()
                 .antMatchers("/**/notifications/countNumberOfNotificationByChauffeurId/{idChauff}").permitAll()
-                .antMatchers("/**/notifications/searchTop4RatingOrderByCreatedDateDescByChauffeurId/{idChauff}").permitAll()
+                .antMatchers("/**/notifications/searchTop4RatingOrderByCreatedDateDescByChauffeurId/{idCustomer}").permitAll()
+                .antMatchers("/**/notifications/searchAllRatingByCustomerId/{idChauff}").permitAll()
                 .antMatchers("/**/notifications/delete/{idNotification}").permitAll()
 
 
@@ -248,7 +257,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/historiqueLogins/**").permitAll()
                 .antMatchers("/**/historiqueLogins/delete/{idHistoriqueLogin}").permitAll()
 
-                .anyRequest().authenticated();
+                .anyRequest()
+                .authenticated()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(unauthorizedHandler)
+                ;
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
@@ -260,9 +276,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         //  .allowedOrigins("**")
-                       // .allowedOrigins("https://sunuchauffeur.com")
+                        // .allowedOrigins("https://sunuchauffeur.com")
                         .allowedOrigins("http://localhost:4200")
-                        .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+                        .allowedMethods("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "TRACE")
                         .maxAge(3600L)
                         .allowedHeaders("*")
                         .exposedHeaders("Authorization")

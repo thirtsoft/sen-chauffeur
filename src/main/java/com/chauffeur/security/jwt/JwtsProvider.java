@@ -20,8 +20,8 @@ import org.springframework.security.core.Authentication;
 
 @Component
 public class JwtsProvider {
-	
-	private static final Logger logger = LoggerFactory.getLogger(JwtsProvider.class);
+
+    private static final Logger logger = LoggerFactory.getLogger(JwtsProvider.class);
 
     @Value("${security.app.jwtSecret}")
     private String jwtSecret;

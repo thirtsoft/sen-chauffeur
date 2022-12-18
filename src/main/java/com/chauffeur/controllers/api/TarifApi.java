@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.chauffeur.dto.PermisDto;
 import com.chauffeur.dto.TarifDto;
 
+import javax.validation.Valid;
+
 import static com.chauffeur.utils.Constants.APP_ROOT;
 
 public interface TarifApi {
@@ -33,7 +35,7 @@ public interface TarifApi {
 			@ApiResponse(code = 400, message = "Aucun Tarif  ajoutée")
 
 	})
-	ResponseEntity<TarifDto> save(@RequestBody TarifDto tarifDto);
+	ResponseEntity<TarifDto> save(@Valid @RequestBody TarifDto tarifDto);
 	
 	@PutMapping(value = APP_ROOT + "/tarifs/update/{idTarif}", 
 			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,7 +46,7 @@ public interface TarifApi {
 			@ApiResponse(code = 400, message = "Aucun Tarif  modifié")
 
 	})
-	ResponseEntity<TarifDto> update(@PathVariable("idTarif") Long idTarif, @RequestBody TarifDto tarifDto);
+	ResponseEntity<TarifDto> update(@PathVariable("idTarif") Long idTarif, @Valid @RequestBody TarifDto tarifDto);
 
 	@GetMapping(value = APP_ROOT + "/tarifs/findById/{idTarif}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Afficher un Tarif par son ID",

@@ -3,6 +3,7 @@ package com.chauffeur.repository;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.chauffeur.models.Jeton;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -25,5 +26,8 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 
     @Query("select n from Notification n where n.chauffeur.id =:num")
     List<Notification> findTop4NotificationOrderByCreatedDateDesc(@Param("num") Long chauffRef);
+
+    @Query("select p from Notification p where p.utilisateur.id =:user order by id Desc")
+    List<Notification> FindListRatingByCustomerId(@Param("user") Long userId);
 
 }

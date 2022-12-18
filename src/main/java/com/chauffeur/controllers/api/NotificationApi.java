@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chauffeur.dto.NotificationDto;
 
+import javax.validation.Valid;
+
 public interface NotificationApi {
 	
 	@PostMapping(value = APP_ROOT + "/notifications/create",
@@ -33,7 +35,7 @@ public interface NotificationApi {
 			@ApiResponse(code = 400, message = "Aucun Notification  ajoutée")
 
 	})
-	ResponseEntity<NotificationDto> save(@RequestBody NotificationDto notificationDto);
+	ResponseEntity<NotificationDto> save(@Valid @RequestBody NotificationDto notificationDto);
 	
 	@PostMapping(value = APP_ROOT + "/notifications/createWithChauffeur/{idNotification}", 
 			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,7 +47,7 @@ public interface NotificationApi {
 
 	})
 	ResponseEntity<NotificationDto> saveNoteToChauffeur(@PathVariable("idNotification") Long id, 
-			@RequestBody NotificationDto notificationDto);
+			@Valid @RequestBody NotificationDto notificationDto);
 	
 	@PutMapping(value = APP_ROOT + "/notifications/update/{idNotification}",
 			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -128,7 +130,20 @@ public interface NotificationApi {
 
 	})
 	ResponseEntity<List<NotificationDto>> getTop4ByOrderByCreatedDateDescByProductId(@PathVariable("idChauff") Long id);
-	
+
+	@GetMapping(value = APP_ROOT + "/notifications/searchAllRatingByCustomerId/{idCustomer}",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Afficher la liste des notations d'un clients vis-àvis des chauffeurs",
+			notes = "Cette méthode permet d'afficher la liste des notations d'un client pour les chauffeur",
+			responseContainer = "List<NotificationDto>")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "La liste des Notifications a été trouvé"),
+			@ApiResponse(code = 400, message = "Aucun liste Notifications")
+
+	})
+	ResponseEntity<List<NotificationDto>> getAllCustomerRatings(@PathVariable("idCustomer") Long id);
+
+
 	@GetMapping(value = APP_ROOT + "/notifications/countNumberOfNotificationByChauffeurId/{idChauff}",
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Décompter le nombre de Notifications d'un chauffeur",

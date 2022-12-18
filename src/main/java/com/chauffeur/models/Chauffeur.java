@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,12 +30,15 @@ public class Chauffeur implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull(message = "reference shouldn't be null")
 	@Column(name = "reference", length = 200)
 	private String reference;
-	
+
+	@NotNull(message = "firstname shouldn't be null")
 	@Column(name = "firstName", length = 90)
 	private String firstName;
 
+	@NotNull(message = "lastname shouldn't be null")
 	@Column(name = "lastName", length = 90)
 	private String lastName;
 	
@@ -43,10 +47,12 @@ public class Chauffeur implements Serializable {
 
 	@Column(name = "email", length = 150)
 	private String email;
-	
+
+	@NotNull(message = "phoneChauffeur shouldn't be null")
 	@Column(name = "phoneChauffeur", length = 30)
 	private String phoneChauffeur;
-	
+
+	@NotNull(message = "experience shouldn't be null")
 	@Column(name = "experience", length = 100)
 	private String nbreAnneeExperience;
 	
@@ -55,7 +61,8 @@ public class Chauffeur implements Serializable {
 	
 	@Column(name = "mobilite", length = 255)
 	private String mobilite;
-	
+
+	@NotNull(message = "disponibility shouldn't be null")
 	@Column(name = "disponibility", length = 100)
 	private String disponibity;
 	

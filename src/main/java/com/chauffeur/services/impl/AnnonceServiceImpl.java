@@ -47,7 +47,6 @@ public class AnnonceServiceImpl implements AnnonceService {
         if (!annonceRepository.existsById(idAnnonce)) {
             throw new ResourceNotFoundException("Annonce not found");
         }
-
         Optional<Annonce> annonce = annonceRepository.findById(idAnnonce);
 
         if (!annonce.isPresent()) {
@@ -55,7 +54,6 @@ public class AnnonceServiceImpl implements AnnonceService {
         }
 
         AnnonceDto annonceDtoResult = AnnonceDto.fromEntityToDto(annonce.get());
-    //    annonceDtoResult.setReference(annonceDto.getReference());
         annonceDtoResult.setLibelle(annonceDto.getLibelle());
         annonceDtoResult.setTime(annonceDto.getTime());
         annonceDtoResult.setProExperience(annonceDto.getProExperience());
@@ -64,11 +62,11 @@ public class AnnonceServiceImpl implements AnnonceService {
         annonceDtoResult.setDescription(annonceDto.getDescription());
         annonceDtoResult.setLieuPoste(annonceDto.getLieuPoste());
         annonceDtoResult.setSalaire(annonceDto.getSalaire());
-        annonceDtoResult.setStatus(annonceDto.getStatus());
         annonceDtoResult.setDateCandidature(annonceDto.getDateCandidature());
         annonceDtoResult.setDateCloture(annonceDto.getDateCloture());
         annonceDtoResult.setPermisDto(annonceDto.getPermisDto());
         annonceDtoResult.setAddresseDto(annonceDto.getAddresseDto());
+        annonceDtoResult.setUtilisateurDto(annonceDto.getUtilisateurDto());
 
         return AnnonceDto.fromEntityToDto(
                 annonceRepository.save(

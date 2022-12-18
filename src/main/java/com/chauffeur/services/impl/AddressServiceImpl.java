@@ -56,9 +56,7 @@ public class AddressServiceImpl implements AddressService {
         addressDtoResult.setCodePostal(addresseDto.getCodePostal());
         addressDtoResult.setPays(addresseDto.getPays());
         addressDtoResult.setVille(addresseDto.getVille());
-        addressDtoResult.setQuartier(addresseDto.getQuartier());
-        addressDtoResult.setRue(addresseDto.getRue());
-       
+
         return AddresseDto.fromEntityToDto(
         		addressRepository.save(
         				AddresseDto.fromDtoToEntity(addressDtoResult)

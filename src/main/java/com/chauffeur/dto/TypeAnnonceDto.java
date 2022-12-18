@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -19,6 +21,7 @@ public class TypeAnnonceDto {
 	
     private String code;
 
+	@NotNull(message = "libelle should not null")
     private String libelle;
     
     private Date createdDate;

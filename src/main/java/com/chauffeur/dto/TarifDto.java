@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -15,10 +17,13 @@ public class TarifDto {
 	
 	private Long id;
 
+	@NotNull(message = "reference should not null")
 	private String reference;
-	
+
+	@NotNull(message = "montantTarif should not null")
 	private String montantTarif;
-	
+
+	@NotNull(message = "description should not null")
 	private String description;
 	
 	private TypeAnnonceDto typeAnnonceDto;

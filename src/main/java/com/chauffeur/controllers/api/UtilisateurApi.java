@@ -23,12 +23,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.chauffeur.dto.UtilisateurDto;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import javax.validation.Valid;
+
 import static com.chauffeur.utils.Constants.APP_ROOT;
 
 public interface UtilisateurApi {
 	
 	@PostMapping(value = APP_ROOT + "/utilisateurs/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<UtilisateurDto> save(@RequestBody UtilisateurDto utilisateurDto);
+    ResponseEntity<UtilisateurDto> save(@Valid @RequestBody UtilisateurDto utilisateurDto);
 
     @GetMapping(value = APP_ROOT + "/utilisateurs/findById/{idUtilisateur}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher et afficher un utilisateur par son ID",

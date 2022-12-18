@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,12 +20,14 @@ public class UtilisateurDto {
 
     private Long id;
 
+    @NotBlank(message = "Nom et Prenom sont obligatory")
     private String name;
 
     private String username;
 
     private String mobile;
 
+    @NotBlank(message = "Email est obligatory")
     private String email;
 
     private String nomEntreprise;
@@ -39,6 +42,7 @@ public class UtilisateurDto {
 
     private String information;
 
+    @NotBlank(message = "Password est obligatory")
     private String password;
 
     private String photo = "avatar.jpg";

@@ -4,6 +4,7 @@ import com.chauffeur.controllers.api.AnnonceApi;
 import com.chauffeur.dto.AnnonceDto;
 import com.chauffeur.dto.HistoriqueAnnonceDto;
 import com.chauffeur.dto.UtilisateurDto;
+import com.chauffeur.enumeration.StatusAnnonce;
 import com.chauffeur.models.Utilisateur;
 import com.chauffeur.services.AnnonceService;
 import com.chauffeur.services.HistoriqueAnnonceService;
@@ -46,7 +47,7 @@ public class AnnonceController implements AnnonceApi {
 
     @Override
     public ResponseEntity<AnnonceDto> save(AnnonceDto annonceDto) {
-        annonceDto.setStatus("ENCOURS");
+        annonceDto.setStatus(String.valueOf(StatusAnnonce.ENCOURS));
         annonceDto.setReference(GenerateValue.generateReference());
         annonceDto.setDateCandidature(new Date());
 
@@ -71,7 +72,7 @@ public class AnnonceController implements AnnonceApi {
 
         annonceDto.setUtilisateurDto(UtilisateurDto.fromEntityToDto(utilisateur));
 
-        annonceDto.setStatus("ENCOURS");
+        annonceDto.setStatus(String.valueOf(StatusAnnonce.ENCOURS));
         annonceDto.setReference(GenerateValue.generateReference());
         annonceDto.setDateCandidature(new Date());
 

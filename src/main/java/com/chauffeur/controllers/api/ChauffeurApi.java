@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
@@ -39,7 +40,7 @@ public interface ChauffeurApi {
 	    @ApiResponse(code = 400, message = "Aucun Chauffeur  crée / modifié")
 	
 	})
-    ResponseEntity<ChauffeurDto> save(@RequestBody ChauffeurDto chauffeurDto);
+    ResponseEntity<ChauffeurDto> save(@Valid @RequestBody ChauffeurDto chauffeurDto);
     
     @PostMapping(value = APP_ROOT + "/chauffeurs/createWithFiles")
     @ApiOperation(value = "Enregistrer un Chauffeur avec une photo et un cv",
@@ -76,7 +77,7 @@ public interface ChauffeurApi {
 	    @ApiResponse(code = 200, message = "Le Chauffeur a été modifiée"),
 	    @ApiResponse(code = 400, message = "Le Chauffeur a n'est pas modifiée")
 	})
-    ResponseEntity<ChauffeurDto> update(@PathVariable("idChauffeur") Long id, @RequestBody ChauffeurDto chauffeurDto);
+    ResponseEntity<ChauffeurDto> update(@PathVariable("idChauffeur") Long id, @Valid @RequestBody ChauffeurDto chauffeurDto);
 
     @GetMapping(value = APP_ROOT + "/chauffeurs/findById/{idChauffeur}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher une Chauffeur par ID",

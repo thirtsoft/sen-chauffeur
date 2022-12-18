@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,10 +29,11 @@ public class Newsleter implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "emailVisiteur")
+    @NotNull(message = "emailVisiteur post should not null")
+    @Column(name = "emailVisiteur", length = 80)
     private String emailVisiteur;
     
-    @Column(name = "createdDate")
+    @Column(name = "createdDate", length = 80)
     private Date createdDate;
     
 }

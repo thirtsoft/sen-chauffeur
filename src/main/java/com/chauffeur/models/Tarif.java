@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 import lombok.AllArgsConstructor;
@@ -29,11 +30,13 @@ public class Tarif implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@NotNull(message = "reference should not null")
 	@Column(name = "reference", length = 50)
 	private String reference;
-	
-	@Column(name = "montant", length = 50)
+
+	@NotNull(message = "montantTarif should not null")
+	@Column(name = "montant", length = 100)
 	private String montantTarif;
 	
 	@Column(name = "description")
@@ -41,7 +44,7 @@ public class Tarif implements Serializable {
 	private String description;
 
 	@ManyToOne
-	@JoinColumn(name = "typeAnnonceId")
+	@JoinColumn(name = "typeAnnonceId", nullable = false)
 	private TypeAnnonce typeAnnonce;
 
 }

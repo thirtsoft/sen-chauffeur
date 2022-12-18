@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,8 +19,10 @@ public class NotificationDto {
 	
 	private Long id;
 
+	@NotNull(message = "nbreEtoile post should not null")
     private float nbreEtoile;
 
+	@NotNull(message = "observation post should not null")
     private String observation;
     
     private Date createdDate;

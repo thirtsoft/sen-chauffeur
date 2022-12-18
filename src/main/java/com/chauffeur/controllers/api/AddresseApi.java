@@ -20,6 +20,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import javax.validation.Valid;
+
 import static com.chauffeur.utils.Constants.APP_ROOT;;
 
 public interface AddresseApi {
@@ -33,7 +35,7 @@ public interface AddresseApi {
 	       @ApiResponse(code = 201, message = "Addresse a été envoyé / modifié"),
 	       @ApiResponse(code = 400, message = "Aucun Addresse  envoyé")
 	})
-	ResponseEntity<AddresseDto> save(@RequestBody AddresseDto addresseDto);
+	ResponseEntity<AddresseDto> save(@Valid @RequestBody AddresseDto addresseDto);
 
 	@PutMapping(value = APP_ROOT + "/addresses/update/{idAddresse}", consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,7 +46,7 @@ public interface AddresseApi {
 		    @ApiResponse(code = 400, message = "Aucun Addresse  modifié")
 		
 	})
-	ResponseEntity<AddresseDto> update(@PathVariable("idAddresse") Long id, @RequestBody AddresseDto addresseDto);
+	ResponseEntity<AddresseDto> update(@PathVariable("idAddresse") Long id, @Valid @RequestBody AddresseDto addresseDto);
 
 	@GetMapping(value = APP_ROOT + "/addresses/findById/{idAddresse}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Rechercher un Addresse par ID",

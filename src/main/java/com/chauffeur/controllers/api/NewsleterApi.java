@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.chauffeur.dto.NewsleterDto;
 
+import javax.validation.Valid;
+
 public interface NewsleterApi {
 	
 	@PostMapping(value = APP_ROOT + "/newsleters/create", 
@@ -32,7 +34,7 @@ public interface NewsleterApi {
 			@ApiResponse(code = 400, message = "Aucun Newsleter  ajoutée")
 
 	})
-	ResponseEntity<NewsleterDto> createNewsleter(@RequestBody NewsleterDto newsleterDto);
+	ResponseEntity<NewsleterDto> createNewsleter(@Valid @RequestBody NewsleterDto newsleterDto);
 	
 	@PutMapping(value = APP_ROOT + "/newsleters/update/{idNewsleter}", 
 			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,7 +46,7 @@ public interface NewsleterApi {
 
 	})
 	ResponseEntity<NewsleterDto> updateNewsleter(@PathVariable("idNewsleter") Long idNewsleter, 
-			@RequestBody NewsleterDto newsleterDto);
+			@Valid @RequestBody NewsleterDto newsleterDto);
 	
 	@GetMapping(value = APP_ROOT + "/newsleters/findById/{idNewsleter}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Afficher un Newsleter par son ID",

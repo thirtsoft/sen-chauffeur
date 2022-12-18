@@ -24,6 +24,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import javax.validation.Valid;
+
 public interface JetonApi {
 	
 	@PostMapping(value = APP_ROOT + "/jetons/create", 
@@ -36,7 +38,7 @@ public interface JetonApi {
 		    @ApiResponse(code = 400, message = "Aucun Jeton  crée")
 		
 	})
-	ResponseEntity<JetonDto> save(@RequestBody JetonDto jetonDto);
+	ResponseEntity<JetonDto> save(@Valid @RequestBody JetonDto jetonDto);
 	
 	@PutMapping(value = APP_ROOT + "/jetons/update/{idJeton}", 
 			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -47,7 +49,7 @@ public interface JetonApi {
 			@ApiResponse(code = 400, message = "Aucun Jeton  modifié")
 
 	})
-	ResponseEntity<JetonDto> update(@PathVariable("idJeton") Long idJeton, @RequestBody JetonDto jetonDto);
+	ResponseEntity<JetonDto> update(@PathVariable("idJeton") Long idJeton, @Valid @RequestBody JetonDto jetonDto);
 	
 	@PatchMapping(value = APP_ROOT + "/jetons/updateEtatOfJeton/{id}")
 	@ApiOperation(value = "Modofier l'etat d'un Jeton",

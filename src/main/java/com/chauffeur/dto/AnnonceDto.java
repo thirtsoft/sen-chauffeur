@@ -10,6 +10,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -18,20 +21,25 @@ public class AnnonceDto {
 	
 	private Long id;
 
-	private String reference;
-	
+	private long reference;
+
+	@NotNull(message = "libelle post should not null")
 	private String libelle;
 	
 	private String lieuPoste;
-	
+
+	@Email
 	private String emailPoste;
 	
 	private String salaire;
-	
+
+	@NotNull(message = "time post should not null")
 	private String time;
-	
+
+	@NotNull(message = "proExperience should not null")
 	private String proExperience;
-	
+
+	@NotNull(message = "typeContrat should not null")
 	private String typeContrat;
 	
 	private boolean selected;
@@ -41,7 +49,8 @@ public class AnnonceDto {
 	private String description;
 
 	private Date dateCandidature;
-	
+
+	@NotNull(message = "dateCloture should not null")
 	private Date dateCloture;
 
 	private PermisDto permisDto;

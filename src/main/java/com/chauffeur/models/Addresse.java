@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,23 +28,21 @@ public class Addresse implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull(message = "reference ne peut pas etre null")
 	@Column(name = "reference", length = 50)
 	private String reference;
 
-	@Column(name = "quartier", unique = true, length = 90)
-	private String quartier;
-
-	@Column(name = "rue", length = 70)
-	private String rue;
-	
 	@Column(name = "codePostal", unique = true, length = 70)
 	private String codePostal;
 
-	@Column(name = "ville", length = 50)
+	@NotNull(message = "ville shouldn't be null")
+	@Column(name = "ville", unique = true, length = 100)
 	private String ville;
 
-	@Column(name = "pays", length = 30)
+	@NotNull(message = "pays shouldn't be null")
+	@Column(name = "pays", length = 70)
 	private String pays;
-	
+
+
 
 }

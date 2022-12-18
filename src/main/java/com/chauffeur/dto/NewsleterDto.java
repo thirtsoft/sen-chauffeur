@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,6 +19,7 @@ public class NewsleterDto {
 	
 	private Long id;
 
+	@NotNull(message = "emailVisiteur post should not null")
     private String emailVisiteur;
     
     private String subject;

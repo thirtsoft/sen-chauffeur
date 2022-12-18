@@ -5,6 +5,8 @@ import java.util.List;
 
 
 import com.chauffeur.dto.NotificationDto;
+import com.chauffeur.models.Notification;
+import org.springframework.data.repository.query.Param;
 
 public interface NotificationService {
 	
@@ -23,6 +25,8 @@ public interface NotificationService {
     List<NotificationDto> findByOrderByIdDesc();
 
     List<NotificationDto> findTop4ByOrderByCreatedDateDescByChauffeurId(Long chauffRef);
+
+    List<NotificationDto> findFindListRatingByCustomerId(Long userId);
 
     BigDecimal countNumberOfNotificationByChauffeurId(String chauffRef);
     

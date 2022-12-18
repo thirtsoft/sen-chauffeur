@@ -3,6 +3,7 @@ package com.chauffeur.controllers.api;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.sun.xml.internal.ws.api.FeatureListValidatorAnnotation;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import javax.validation.Valid;
+
 import static com.chauffeur.utils.Constants.APP_ROOT;
 
 public interface AnnonceApi {
@@ -35,7 +38,7 @@ public interface AnnonceApi {
 		    @ApiResponse(code = 400, message = "Aucun Annonce  crée / modifié")
 		
 	})
-	ResponseEntity<AnnonceDto> save(@RequestBody AnnonceDto annonceDto);
+	ResponseEntity<AnnonceDto> save(@Valid @RequestBody AnnonceDto annonceDto);
 	
 	@PostMapping(value = APP_ROOT + "/annonces/createAnnonceWithUser", 
 			consumes = MediaType.APPLICATION_JSON_VALUE, 
@@ -47,7 +50,7 @@ public interface AnnonceApi {
 		    @ApiResponse(code = 400, message = "Aucun Annonce  crée / modifié")
 		
 	})
-	ResponseEntity<AnnonceDto> createAnnonceWithUser(@RequestBody AnnonceDto annonceDto, @RequestParam Long id);
+	ResponseEntity<AnnonceDto> createAnnonceWithUser(@Valid @RequestBody AnnonceDto annonceDto, @RequestParam Long id);
 	
 	@PutMapping(value = APP_ROOT + "/annonces/update/{idAnnonce}", 
 			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -58,7 +61,7 @@ public interface AnnonceApi {
 		    @ApiResponse(code = 400, message = "Aucun Annonce  modifié")
 		
 	})
-	ResponseEntity<AnnonceDto> update(@PathVariable("idAnnonce") Long idAnnonce, @RequestBody AnnonceDto annonceDto);
+	ResponseEntity<AnnonceDto> update(@PathVariable("idAnnonce") Long idAnnonce, @Valid @RequestBody AnnonceDto annonceDto);
 	
 	@PatchMapping(value = APP_ROOT + "/annonces/updateStatusOfAnnonce/{id}")
 	@ApiOperation(value = "Modofier le status d'une Annonce",

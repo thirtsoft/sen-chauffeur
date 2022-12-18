@@ -21,8 +21,8 @@ import com.chauffeur.security.service.UserDetailsServiceImpl;
 import org.springframework.util.StringUtils;
 
 public class JwtAuthTokenFilter extends OncePerRequestFilter {
-	
-	private static final Logger logger = LoggerFactory.getLogger(JwtAuthTokenFilter.class);
+
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthTokenFilter.class);
 
     @Autowired
     private JwtsProvider jwtsProvider;
@@ -66,5 +66,5 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
 
         return null;
     }
-	
+
 }

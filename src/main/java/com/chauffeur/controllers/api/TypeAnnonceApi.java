@@ -19,6 +19,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import javax.validation.Valid;
+
 public interface TypeAnnonceApi {
 	
 	@PostMapping(value = APP_ROOT + "/typeAnnonces/create", consumes = MediaType.APPLICATION_JSON_VALUE, 
@@ -30,7 +32,7 @@ public interface TypeAnnonceApi {
 	    @ApiResponse(code = 400, message = "Aucun TypeAnnonce  crée / modifié")
 	
 	})
-	ResponseEntity<TypeAnnonceDto> saveTypeAnnonce(@RequestBody TypeAnnonceDto typeAnnonceDto);
+	ResponseEntity<TypeAnnonceDto> saveTypeAnnonce(@Valid @RequestBody TypeAnnonceDto typeAnnonceDto);
 	
 	@PutMapping(value = APP_ROOT + "/typeAnnonces/update/{idTypeAnnonce}",
 			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -41,7 +43,7 @@ public interface TypeAnnonceApi {
 	    @ApiResponse(code = 404, message = "Aucun TypeAnnonce  crée / modifié")
 	
 	})
-	ResponseEntity<TypeAnnonceDto> updateTypeAnnonce(@PathVariable("idTypeAnnonce") Long idTypeAnnonce, @RequestBody TypeAnnonceDto typeAnnonceDto);
+	ResponseEntity<TypeAnnonceDto> updateTypeAnnonce(@PathVariable("idTypeAnnonce") Long idTypeAnnonce, @Valid @RequestBody TypeAnnonceDto typeAnnonceDto);
 
 	@GetMapping(value = APP_ROOT + "/typeAnnonces/findById/{idTypeAnnonce}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Rechercher une TypeAnnonce par ID",

@@ -1,41 +1,37 @@
 package com.chauffeur.services.impl;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.chauffeur.dto.ChauffeurDto;
 import com.chauffeur.dto.NotificationDto;
 import com.chauffeur.exceptions.ResourceNotFoundException;
-import com.chauffeur.models.Chauffeur;
 import com.chauffeur.models.Notification;
 import com.chauffeur.repository.ChauffeurRepository;
 import com.chauffeur.repository.NotificationRepository;
 import com.chauffeur.services.ChauffeurService;
 import com.chauffeur.services.NotificationService;
-
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 @Slf4j
 public class NotificationServiceImpl implements NotificationService {
-	
+
     private final NotificationRepository notificationRepository;
-	
+
     private final ChauffeurService chauffeurService;
-    
+
 
     @Autowired
     public NotificationServiceImpl(NotificationRepository notificationRepository,
-    							   ChauffeurService chauffeurService,
-    							   ChauffeurRepository chauffeurRepository) {
+                                   ChauffeurService chauffeurService,
+                                   ChauffeurRepository chauffeurRepository) {
         this.notificationRepository = notificationRepository;
         this.chauffeurService = chauffeurService;
     }
@@ -44,31 +40,31 @@ public class NotificationServiceImpl implements NotificationService {
     public NotificationDto save(NotificationDto notificationDto) {
 
         return NotificationDto.fromEntityToDto(
-        		notificationRepository.save(
-                		NotificationDto.fromDtoToEntity(notificationDto)
+                notificationRepository.save(
+                        NotificationDto.fromDtoToEntity(notificationDto)
                 )
         );
     }
-    
-    @Transactional
-   	@Override
-   	public NotificationDto saveNoteToChauffeur(Long idChauff, NotificationDto notificationDto) {
-        
-   		ChauffeurDto chauffeurDtoOptional = chauffeurService.findById(idChauff);
 
-   		notificationDto.setChauffeurDto(chauffeurDtoOptional);
-   		
-   		 return NotificationDto.fromEntityToDto(
-   	        		notificationRepository.save(
-   	        				NotificationDto.fromDtoToEntity(notificationDto)
-   	                )
-   	        );
-   		
-   	}
-    
+    @Transactional
     @Override
-	public NotificationDto update(Long idNotification, NotificationDto notificationDto) {
-		if (!notificationRepository.existsById(idNotification)) {
+    public NotificationDto saveNoteToChauffeur(Long idChauff, NotificationDto notificationDto) {
+
+        ChauffeurDto chauffeurDtoOptional = chauffeurService.findById(idChauff);
+
+        notificationDto.setChauffeurDto(chauffeurDtoOptional);
+
+        return NotificationDto.fromEntityToDto(
+                notificationRepository.save(
+                        NotificationDto.fromDtoToEntity(notificationDto)
+                )
+        );
+
+    }
+
+    @Override
+    public NotificationDto update(Long idNotification, NotificationDto notificationDto) {
+        if (!notificationRepository.existsById(idNotification)) {
             throw new ResourceNotFoundException("Notification not found");
         }
 
@@ -82,13 +78,13 @@ public class NotificationServiceImpl implements NotificationService {
         notificationDtoResult.setNbreEtoile(notificationDto.getNbreEtoile());
         notificationDtoResult.setObservation(notificationDto.getObservation());
         notificationDtoResult.setChauffeurDto(notificationDto.getChauffeurDto());
-       
+
         return NotificationDto.fromEntityToDto(
-        		notificationRepository.save(
-        				NotificationDto.fromDtoToEntity(notificationDtoResult)
+                notificationRepository.save(
+                        NotificationDto.fromDtoToEntity(notificationDtoResult)
                 )
         );
-	}
+    }
 
     @Override
     public NotificationDto findById(Long id) {
@@ -105,44 +101,51 @@ public class NotificationServiceImpl implements NotificationService {
         );
     }
 
-    
+
     @Override
     public List<NotificationDto> findAll() {
         return notificationRepository.findAll().stream()
                 .map(NotificationDto::fromEntityToDto)
                 .collect(Collectors.toList());
     }
-    
+
     @Override
-	public List<NotificationDto> findByOrderByIdDesc() {
-    	return notificationRepository.findByOrderByIdDesc().stream()
+    public List<NotificationDto> findByOrderByIdDesc() {
+        return notificationRepository.findByOrderByIdDesc().stream()
                 .map(NotificationDto::fromEntityToDto)
                 .collect(Collectors.toList());
-	}
-    
-    @Override
-	public List<NotificationDto> findTop3RatingOrderByCreatedDateDesc() {
-    	 return notificationRepository.findTop3ByOrderByCreatedDateDesc().stream()
-                 .map(NotificationDto::fromEntityToDto)
-                 .collect(Collectors.toList());
-	}
+    }
 
-	@Override
-	public List<NotificationDto> findTop4ByOrderByCreatedDateDescByChauffeurId(Long chauffRef) {
-		return notificationRepository.findTop4NotificationOrderByCreatedDateDesc(chauffRef).stream()
+    @Override
+    public List<NotificationDto> findTop3RatingOrderByCreatedDateDesc() {
+        return notificationRepository.findTop3ByOrderByCreatedDateDesc().stream()
                 .map(NotificationDto::fromEntityToDto)
                 .collect(Collectors.toList());
-	}
+    }
 
-	@Override
-	public BigDecimal countNumberOfNotificationByChauffeurId(String chauffRef) {
-		return notificationRepository.countNumberOfNotificationByChauffeurId(chauffRef);
-	}
-	
-	@Override
-	public BigDecimal countNumberOfNotification() {
-		return notificationRepository.countNumberOfNotification();
-	}
+    @Override
+    public List<NotificationDto> findTop4ByOrderByCreatedDateDescByChauffeurId(Long chauffRef) {
+        return notificationRepository.findTop4NotificationOrderByCreatedDateDesc(chauffRef).stream()
+                .map(NotificationDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<NotificationDto> findFindListRatingByCustomerId(Long userId) {
+        return notificationRepository.FindListRatingByCustomerId(userId).stream()
+                .map(NotificationDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public BigDecimal countNumberOfNotificationByChauffeurId(String chauffRef) {
+        return notificationRepository.countNumberOfNotificationByChauffeurId(chauffRef);
+    }
+
+    @Override
+    public BigDecimal countNumberOfNotification() {
+        return notificationRepository.countNumberOfNotification();
+    }
 
     @Override
     public void delete(Long id) {
@@ -154,9 +157,5 @@ public class NotificationServiceImpl implements NotificationService {
 
     }
 
-   
 
-	
-
-	
 }

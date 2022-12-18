@@ -4,7 +4,6 @@ import com.chauffeur.controllers.api.AuthApi;
 import com.chauffeur.dto.HistoriqueLoginDto;
 import com.chauffeur.dto.UtilisateurDto;
 import com.chauffeur.enumeration.RoleName;
-import com.chauffeur.exceptions.ResourceNotFoundException;
 import com.chauffeur.message.request.LoginForm;
 import com.chauffeur.message.request.SignUpForm;
 import com.chauffeur.message.response.JwtResponse;
@@ -25,10 +24,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 

@@ -17,11 +17,14 @@ import javax.validation.constraints.NotNull;
 public class PermisDto {
 	
 	private Long id;
-	
+
+	@NotNull(message = "typePermis should not null")
 	private String typePermis;
 
+	@NotNull(message = "designation should not null")
 	private String designation;
-	
+
+	@NotNull(message = "validite should not null")
 	private int validite;
 	
 	public static PermisDto fromEntityToDto(Permis permis) {

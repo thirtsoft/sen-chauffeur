@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,14 +30,16 @@ public class Notification implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "nbreEtoile post should not null")
     @Column(name = "nbreEtoile", length = 60)
     private float nbreEtoile;
 
+    @NotNull(message = "observation post should not null")
     @Column(name = "observation")
     @Lob
     private String observation;
     
-    @Column(name = "createdDate")
+    @Column(name = "createdDate", length = 80)
     private Date createdDate;
     
     @ManyToOne

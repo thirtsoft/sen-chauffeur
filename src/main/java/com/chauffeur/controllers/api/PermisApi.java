@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.chauffeur.dto.ChauffeurDto;
 import com.chauffeur.dto.PermisDto;
 
+import javax.validation.Valid;
+
 import static com.chauffeur.utils.Constants.APP_ROOT;
 
 public interface PermisApi {
@@ -31,7 +33,7 @@ public interface PermisApi {
 			@ApiResponse(code = 400, message = "Aucun Permis  ajoutée")
 
 	})
-	ResponseEntity<PermisDto> save(@RequestBody PermisDto permisDto);
+	ResponseEntity<PermisDto> save(@Valid @RequestBody PermisDto permisDto);
 	
 	@PutMapping(value = APP_ROOT + "/permis/update/{idPermis}",
 			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,7 +44,7 @@ public interface PermisApi {
 			@ApiResponse(code = 400, message = "Aucun Permis  modifié")
 
 	})
-	ResponseEntity<PermisDto> update(@PathVariable("idPermis") Long id, @RequestBody PermisDto permisDto);
+	ResponseEntity<PermisDto> update(@PathVariable("idPermis") Long id, @Valid @RequestBody PermisDto permisDto);
 
 	@GetMapping(value = APP_ROOT + "/permis/findById/{idPermis}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Afficher un Permis par son ID",

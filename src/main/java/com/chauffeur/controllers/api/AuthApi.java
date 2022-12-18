@@ -18,22 +18,21 @@ import io.swagger.annotations.ApiResponses;
 import static com.chauffeur.utils.Constants.APP_ROOT;
 
 public interface AuthApi {
-	
-	@PostMapping(value = APP_ROOT + "/auth/authenticated", 
-			consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+
+
+	@PostMapping(value = APP_ROOT + "/auth/authenticated")
 	@ApiOperation(value = "Se connecter",
-    notes = "Cette méthode permet à un utilisateur de se connecter",
-	       response = EmailDto.class)
+			notes = "Cette méthode permet à un utilisateur de se connecter", response = LoginForm.class)
 	@ApiResponses(value = {
-	       @ApiResponse(code = 200, message = "utilisateur a été envoyé / modifié"),
-	       @ApiResponse(code = 400, message = "Aucun connection utilisateur  établie")
+			@ApiResponse(code = 200, message = "utilisateur a été envoyé / modifié"),
+			@ApiResponse(code = 400, message = "Aucun connection utilisateur  établie")
 	})
-    ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginForm);
+	ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginForm);
 
 
 	@PostMapping(value = APP_ROOT + "/auth/signUp", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Create Account",
-			notes = "Cette méthode permet à un utilisateur de créer un compte une Category", response = SignUpForm.class)
+			notes = "Cette méthode permet à un utilisateur de créer un compte", response = SignUpForm.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 201, message = "Le compte a été crée"),
 			@ApiResponse(code = 400, message = "Aucun Compte  crée / modifié")

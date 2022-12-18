@@ -29,14 +29,15 @@ public class Permis implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
+	@NotNull(message = "typePermis should not null")
 	@Column(name = "typePermis", unique = true, length = 50)
 	private String typePermis;
 
-	@NotNull
-	@Column(name = "designation", unique = true,  length = 90)
+	@NotNull(message = "designation should not null")
+	@Column(name = "designation", unique = true,  length = 100)
 	private String designation;
-	
+
+	@NotNull(message = "validite should not null")
 	@Column(name = "validite", length = 90)
 	private int validite;
 
