@@ -21,7 +21,9 @@ public class AnnonceDto {
 	
 	private Long id;
 
-	private long reference;
+	//	private long reference;
+
+	private String reference;
 
 	@NotNull(message = "libelle post should not null")
 	private String libelle;

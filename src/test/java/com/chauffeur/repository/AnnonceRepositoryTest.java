@@ -36,7 +36,7 @@ public class AnnonceRepositoryTest {
         Long recId = (long) 1;
         Recruteur recruteur = recruteurRepository.findById(recId).orElse(null);
 
-        long reference = 45612L;
+        String reference = "45612L";
         String lieuPoste = "Tairou";
         Annonce annonceDto = new Annonce();
         annonceDto.setReference(reference);
@@ -58,7 +58,7 @@ public class AnnonceRepositoryTest {
         Long recId = (long) 1;
         Recruteur recruteur = recruteurRepository.findById(recId).orElse(null);
 
-        long reference = 9456123L;
+        String reference = "9456123L";
         String lieuPoste = "Tairou";
         String salaire = "120000fcfa";
         Annonce annonceDto = new Annonce();
@@ -71,7 +71,7 @@ public class AnnonceRepositoryTest {
         annonceRepository.save(annonceDto);
 
 
-        long referenceChauffeur = 9456123L;
+        String referenceChauffeur = "9456123L";
         annonceDto.setReference(referenceChauffeur);
 //        annonceDto.setId(2L);
         Annonce annonceUpdate = annonceRepository.save(annonceDto);
@@ -88,7 +88,7 @@ public class AnnonceRepositoryTest {
         Long recId = (long) 1;
         Recruteur recruteur = recruteurRepository.findById(recId).orElse(null);
 
-        long reference = 894561L;
+        String reference = "9456123L";
         String lieuPoste = "Tairou";
         String salaire = "120000fcfa";
         Annonce annonceDto = new Annonce();
@@ -114,7 +114,7 @@ public class AnnonceRepositoryTest {
         Long recId = (long) 1;
         Recruteur recruteur = recruteurRepository.findById(recId).orElse(null);
 
-        long reference = 789456L;
+        String reference = "789456L";
         String lieuPoste = "Tairou";
         String salaire = "120000fcfa";
         Annonce annonceDto = new Annonce();
@@ -126,7 +126,7 @@ public class AnnonceRepositoryTest {
 
         annonceRepository.save(annonceDto);
 
-        long reference2 = 7894562147L;
+        String reference2 = "7894562147L";
         Annonce annonceDto2 = new Annonce();
         annonceDto2.setReference(reference2);
         annonceDto.setStatus("VALIDEE");
@@ -148,7 +148,7 @@ public class AnnonceRepositoryTest {
         Long recId = (long) 1;
         Recruteur recruteur = recruteurRepository.findById(recId).orElse(null);
 
-        long reference = 25634L;
+        String reference = "25634L";
         String lieuPoste = "Tairou";
         String salaire = "120000fcfa";
         Annonce annonceDto = new Annonce();

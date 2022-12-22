@@ -19,7 +19,6 @@ import javax.servlet.ServletContext;
 @SpringBootApplication
 public class SenChauffeurApplication implements CommandLineRunner {
 
-    /*
 
     private static final Logger LOG = LoggerFactory.getLogger(SenChauffeurApplication.class);
     @Autowired
@@ -49,6 +48,7 @@ public class SenChauffeurApplication implements CommandLineRunner {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /*
         @Autowired
         private EmailService emailService;
 
@@ -116,13 +116,12 @@ public class SenChauffeurApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*
 
-        Permis p1 = permisRepository.save(new Permis(1L, "P1", "Permis Poids Legere", 10));
-        Permis p2 = permisRepository.save(new Permis(2L, "P2", "Permis Professionnel", 5));
-        Permis p3 = permisRepository.save(new Permis(3L, "P3", "Permis Tracteur", 15));
-        Permis p4 = permisRepository.save(new Permis(4L, "P4", "Permis Transport", 20));
-        Permis p5 = permisRepository.save(new Permis(5L, "P5", "Permis Conducteur d’Engin", 20));
+        Permis p1 = permisRepository.save(new Permis(1L, "Permis Poids Legere", 10));
+        Permis p2 = permisRepository.save(new Permis(2L, "Permis Professionnel", 5));
+        Permis p3 = permisRepository.save(new Permis(3L, "Permis Tracteur", 15));
+        Permis p4 = permisRepository.save(new Permis(4L,  "Permis Transport", 20));
+        Permis p5 = permisRepository.save(new Permis(5L,  "Permis Conducteur d’Engin", 20));
 
         Addresse ad1 = addresseRepository.save(new Addresse(1L, "DK", "54DK", "Dakar", "SENEGAL"));
         Addresse ad2 = addresseRepository.save(new Addresse(2L, "DL", "4DB", "'Diourbel'", "SENEGAL"));
@@ -236,12 +235,13 @@ public class SenChauffeurApplication implements CommandLineRunner {
         admin.setName("Admin diallo");
         admin.setEmail("admin@gmail.com");
         admin.setActive(true);
-        admin.setPassword(bCryptPasswordEncoder.encode("admin1234"));
+        admin.setPassword(bCryptPasswordEncoder.encode("sunuchauffeur@2022"));
         utilisateurRepository.save(admin);
         utilisateurService.addRoleToUser("Admin", RoleName.ROLE_ADMIN);
 
 
-        */
+
+
 
     }
 

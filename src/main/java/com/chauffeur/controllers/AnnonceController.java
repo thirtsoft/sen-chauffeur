@@ -54,7 +54,8 @@ public class AnnonceController implements AnnonceApi {
     @Override
     public ResponseEntity<AnnonceDto> save(AnnonceDto annonceDto) {
         annonceDto.setStatus(String.valueOf(StatusAnnonce.ENCOURS));
-        annonceDto.setReference(generateReference());
+      //  annonceDto.setReference(generateReference());
+        annonceDto.setReference("REF_" +  (System.currentTimeMillis() * 10000) );
         annonceDto.setDateCandidature(new Date());
 
         AnnonceDto newAnnonceDto = annonceService.save(annonceDto);
@@ -79,7 +80,8 @@ public class AnnonceController implements AnnonceApi {
         annonceDto.setUtilisateurDto(UtilisateurDto.fromEntityToDto(utilisateur));
 
         annonceDto.setStatus(String.valueOf(StatusAnnonce.ENCOURS));
-        annonceDto.setReference(generateReference());
+    //    annonceDto.setReference(generateReference());
+        annonceDto.setReference("REF_" +  (System.currentTimeMillis() * 10000) );
         annonceDto.setDateCandidature(new Date());
 
         AnnonceDto annonceDtoResult = annonceService.save(annonceDto);

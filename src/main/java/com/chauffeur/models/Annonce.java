@@ -29,8 +29,9 @@ public class Annonce implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "reference", unique = true, length = 50)
-    private long reference;
+    @Column(name = "reference", unique = true, length = 150)
+    private String reference;
+    //  private long reference;
 
     @NotNull(message = "libelle post should not null")
     @Column(name = "libelle", length = 120)

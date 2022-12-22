@@ -37,7 +37,7 @@ public class AnnonceServiceTest {
     //    RecruteurDto recruteurDto = new RecruteurDto();
         AnnonceDto chauffeurDto = new AnnonceDto();
         chauffeurDto.setId(1L);
-        chauffeurDto.setReference(1L);
+        chauffeurDto.setReference("1L");
         chauffeurDto.setLieuPoste("AAA");
         chauffeurDto.setPermisDto(permisDto);
    //     chauffeurDto.setRecruteurDto(recruteurDto);
@@ -61,7 +61,7 @@ public class AnnonceServiceTest {
   //      RecruteurDto recruteurDto = new RecruteurDto();
         AnnonceDto chauffeurDto = new AnnonceDto();
         chauffeurDto.setId(1L);
-        chauffeurDto.setReference(123L);
+        chauffeurDto.setReference("123L");
         chauffeurDto.setLieuPoste("AAA");
         chauffeurDto.setPermisDto(permisDto);
   //      chauffeurDto.setRecruteurDto(recruteurDto);
@@ -83,7 +83,7 @@ public class AnnonceServiceTest {
         RecruteurDto recruteurDto = new RecruteurDto();
         AnnonceDto chauffeurDto = new AnnonceDto();
         chauffeurDto.setId(1L);
-        chauffeurDto.setReference(231L);
+        chauffeurDto.setReference("231L");
         chauffeurDto.setLieuPoste("AAA");
         chauffeurDto.setPermisDto(permisDto);
      //   chauffeurDto.setRecruteurDto(recruteurDto);

@@ -1,6 +1,7 @@
 package com.chauffeur.models;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,16 +30,12 @@ public class Permis implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull(message = "typePermis should not null")
-	@Column(name = "typePermis", unique = true, length = 50)
-	private String typePermis;
-
 	@NotNull(message = "designation should not null")
 	@Column(name = "designation", unique = true,  length = 100)
 	private String designation;
 
 	@NotNull(message = "validite should not null")
-	@Column(name = "validite", length = 90)
+	@Column(name = "validite", length = 30)
 	private int validite;
 
 

@@ -53,10 +53,9 @@ public class PermisServiceImpl implements PermisService {
         }
 
         PermisDto permisDtoResult = PermisDto.fromEntityToDto(permis.get());
-        permisDtoResult.setTypePermis(permisDto.getTypePermis());
         permisDtoResult.setDesignation(permisDto.getDesignation());
         permisDtoResult.setValidite(permisDto.getValidite());
-       
+
         return PermisDto.fromEntityToDto(
         		permisRepository.save(
         				PermisDto.fromDtoToEntity(permisDtoResult)

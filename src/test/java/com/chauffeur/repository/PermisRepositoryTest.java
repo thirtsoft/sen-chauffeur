@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ public class PermisRepositoryTest {
     @Rollback(false)
     public void testCreatePermis() {
   
-    	Permis permis = new Permis(1L, "AA", "Poids Lours", 10);
+    	Permis permis = new Permis(1L, "Poids Lours", 10);
     	
     	Permis permisResult = permisRepository.save(permis);
     	
@@ -37,23 +38,23 @@ public class PermisRepositoryTest {
     @Test
     @Rollback(false)
     public void TestUpdatePermis() {
-    	Permis permis = new Permis(1L, "AA", "Poids Lours", 10);
+    	Permis permis = new Permis(1L, "Poids Lours", 10);
     	permisRepository.save(permis);
     	
-    	String typePermis = "A";
+    	String designation = "A";
     	permis.setId(2L);
-    	permis.setTypePermis(typePermis);
+    	permis.setDesignation(designation);
     	
     	Permis permisUpdate = permisRepository.save(permis);
     	
-    	 assertThat(permisUpdate.getTypePermis()).isEqualTo(typePermis);
+    	 assertThat(permisUpdate.getDesignation()).isEqualTo(designation);
     	 assertThat(permisUpdate.getDesignation()).isEqualTo(permis.getDesignation());
 
     }
 
     @Test
     public void testFindById() {
-    	Permis permis = new Permis(1L, "AA", "Poids Lours", 10);
+    	Permis permis = new Permis(1L, "Poids Lours", 10);
     	
     	Permis permisResult = permisRepository.save(permis);
 
@@ -67,10 +68,10 @@ public class PermisRepositoryTest {
     @Test
     public void testFindAll() {
     	
-    	Permis permis = new Permis(1L, "AA", "Poids Lours", 10);
+    	Permis permis = new Permis(1L, "Poids Lours", 10);
     	permisRepository.save(permis);
     	
-    	Permis permis2 = new Permis(2L, "AAA", "Poids Lours", 10);
+    	Permis permis2 = new Permis(2L, "Poids Lours", 10);
     	permisRepository.save(permis2);
     	
         List<Permis> permisList = permisRepository.findAll();
@@ -82,7 +83,7 @@ public class PermisRepositoryTest {
     @Test
     @Rollback(false)
     public void testDelete() {
-    	Permis permis = new Permis(1L, "AA", "Poids Lours", 10);
+    	Permis permis = new Permis(1L, "Poids Lours", 10);
 
     	Permis categoryDtoResult2 = permisRepository.save(permis);
 

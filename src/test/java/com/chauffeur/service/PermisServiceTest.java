@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class PermisServiceTest {
 
     @Test
     public void CreateCategoryTest() {
-    	PermisDto categoryDto = new PermisDto(1L, "AAA", "TTT", 10);
+    	PermisDto categoryDto = new PermisDto(1L, "TTT", 10);
     	
     	Permis category = PermisDto.fromDtoToEntity(categoryDto);
         when(categoryRepository.save(category)).thenReturn(category);
@@ -65,7 +66,6 @@ public class PermisServiceTest {
     public void findByIdTest() {
     	PermisDto categoryDto = PermisDto.builder()
     			.id(1L)
-    			.typePermis("PPP")
                 .designation("AAA")
                 .build();
         Optional<Permis> categorie = Optional.ofNullable(PermisDto.fromDtoToEntity(categoryDto));
