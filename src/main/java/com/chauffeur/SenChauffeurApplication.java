@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.ServletContext;
+import java.util.Date;
 
 
 @SpringBootApplication
@@ -117,14 +118,16 @@ public class SenChauffeurApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
 
-        Permis p1 = permisRepository.save(new Permis(1L, "Permis Poids Legere", 10));
-        Permis p2 = permisRepository.save(new Permis(2L, "Permis Professionnel", 5));
-        Permis p3 = permisRepository.save(new Permis(3L, "Permis Tracteur", 15));
-        Permis p4 = permisRepository.save(new Permis(4L,  "Permis Transport", 20));
-        Permis p5 = permisRepository.save(new Permis(5L,  "Permis Conducteur d’Engin", 20));
+        /*
+        Permis p1 = permisRepository.save(new Permis(1L, "Permis poids Leger", 10));
+        Permis p2 = permisRepository.save(new Permis(2L, "Permis poids Lourd", 20));
+        Permis p3 = permisRepository.save(new Permis(3L, "Permis professionnel", 5));
+        Permis p4 = permisRepository.save(new Permis(4L, "Permis tracteur", 15));
+        Permis p5 = permisRepository.save(new Permis(5L, "Permis transport", 20));
+        Permis p6 = permisRepository.save(new Permis(6L, "Permis conducteur d’Engin", 20));
 
         Addresse ad1 = addresseRepository.save(new Addresse(1L, "DK", "54DK", "Dakar", "SENEGAL"));
-        Addresse ad2 = addresseRepository.save(new Addresse(2L, "DL", "4DB", "'Diourbel'", "SENEGAL"));
+        Addresse ad2 = addresseRepository.save(new Addresse(2L, "DL", "4DB", "Diourbel", "SENEGAL"));
         Addresse ad3 = addresseRepository.save(new Addresse(3L, "FT", "54FT", "Fatick", "SENEGAL"));
         Addresse ad4 = addresseRepository.save(new Addresse(4L, "KF", "54KF", "Kaffrine", "SENEGAL"));
         Addresse ad5 = addresseRepository.save(new Addresse(5L, "KL", "54KL", "Kaolack", "SENEGAL"));
@@ -139,48 +142,59 @@ public class SenChauffeurApplication implements CommandLineRunner {
         Addresse ad14 = addresseRepository.save(new Addresse(14L, "ZG", "54ZG", "Ziguinchor", "SENEGAL"));
 
 
-        Chauffeur ch1 = new Chauffeur(1L, "Chauffeur particulier", "Thierno", "Diallo", "M", "thierno@gmail.com", "779221401", "3", 120000,
-                "Dk-Thies-Bignona-Zig", "Full-Time", true, "cv_thierno.pdf", "photo1.jpg", p1, ad14);
-        Chauffeur ch2 = new Chauffeur(2L, "Chauffeur particulier", "Ibrahima", "Sene", "M", "ibrahim@gmail.com", "778064307", "15", 250000,
-                "Senegal et SousRegion", "Full-Time", true, "cv_seneIbrahima.pdf", "photo2.jpg", p1, ad1);
-        Chauffeur ch3 = new Chauffeur(3L, "Chauffeur Livraison", "Abdou", "Thiaw", "M", "abdou@gmail.com", "779402602", "6", 200000,
-                "Partout au Senegal", "Full-Time", true, "cv_abduThiaw.pdf", "photo3.jpg", p1, ad1);
-        Chauffeur ch4 = new Chauffeur(4L, "Chauffeur transport", "Ngor", "Ndour", "M", "ngor@gmail.com", "773152045", "8", 220000,
-                "Partout au Senegal", "Partial-Time", true, "cv_ngor.pdf", "photo5.jpg", p1, ad1);
-        Chauffeur ch5 = new Chauffeur(5L, "Chauffeur professionel", "Khadim", "Ndiaye", "M", "khadim@gmail.com", "776440310", "7", 600000,
-                "Partout au Senegal", "Full-Time", true, "cv_khadimNdiaye.pdf", "photo6.jpg", p1, ad1);
-        Chauffeur ch6 = new Chauffeur(6L, "Chauffeur transport", "Modou", "Fall", "M", "modu@gmail.com", "776440310", "11", 600000,
-                "Partout au Senegal", "Full-Time", true, "cv_modu.pdf", "photo4.jpg", p2, ad1);
+        Chauffeur ch1 = new Chauffeur(1L, "Chauffeur particulier", "Thierno", "Diallo", "779221401", "3", 120000,
+                "Dakar-Bignona-Ziguinchor-Thies", "Full-Time", true, "cv_thierno.pdf", "thierno_diallo.jpeg", new Date(), "Je m'appelle Thierno Diallo chauffeur particulier. Je peux conduire plusieurs categorie de voiture: un taxi, particulier, poids lourds. Je suis conducteur de moto depuis 2015.",
+                p2, ad14);
 
-        Chauffeur ch7 = new Chauffeur(7L, "Chauffeur Camion", "Abdou", "Diouf", "M", "abdue@gmail.com", "776440310", "10ans", 600000,
-                "Dk-Zig", "Full-Time", true, "cv1.pdf", "photo7.jpg", p5, ad4);
-        Chauffeur ch8 = new Chauffeur(8L, "Chauffeur engin", "Malick", "Sane", "F", "malick@gmail.com", "776440310", "10ans", 600000,
-                "Dk-Thies", "Partial-Time", false, "cv1.pdf", "photo8.jpg", p4, ad3);
+        Chauffeur ch2 = new Chauffeur(2L, "Chauffeur particulier", "Ibrahima", "Sene", "778064307", "15", 300000,
+                "Partout Senegal et SousRegion", "Full-Time", true, "cv_seneIbrahima.pdf", "ibrahima_sene.jpeg", new Date(), "Je m'appelle Ibrahima Sene, chauffeur particulier. Je peux conduire plusieurs categorie de voiture: taxi, autobus, car,  particulier. Je sais lire et ecrire en Français. Je suis diplome du Certificat de fin etude primaire.",
+                p2, ad1);
 
-        Chauffeur ch9 = new Chauffeur(9L, "Chauffeur Taxi", "Ousseynou", "Ly", "M", "ouzin@gmail.com", "776440310", "10ans", 600000,
-                "Dk-Thies", "Full-Time", true, "cv1.pdf", "photo9.jpg", p4, ad5);
+        Chauffeur ch3 = new Chauffeur(3L, "Chauffeur livreur", "Abdou", "Thiaw", "779402602", "6", 250000,
+                "Partout Senegal et SousRegion", "Full-Time", true, "cv_abduThiaw.pdf", "abdou_thiaw.jpeg", new Date(), "Je m'appelle Abdou Thiaw, chauffeur livreur. Je peux conduire plusieurs categorie de voiture: taxi, autobus, car,  particulier. Je sais lire et ecrire en Français. Je suis diplome du Certificat de fin etude primaire.",
+                p2, ad1);
 
-        Chauffeur ch10 = new Chauffeur(10L, "Chauffeur Transport", "Alassane", "Badji", "M", "alassane@gmail.com", "776440310", "10ans", 600000,
-                "Dk-Thies", "Full-Time", false, "cv1.pdf", "photo10.jpg", p4, ad6);
+        Chauffeur ch4 = new Chauffeur(4L, "Chauffeur transport", "Ngor", "Ndour", "773152045", "8", 250000,
+                "Partout au Senegal", "Full-Time", true, "cv_ngor.pdf", "defaut.jpeg", new Date(), "Je m'appelle Ngor Ndour, chauffeur livreur. Je peux conduire plusieurs categorie de voiture: taxi, autobus, car,  particulier. Je sais lire et ecrire en Français. Je suis diplome du Certificat de fin etude primaire.",
+                p2, ad1);
 
-        Chauffeur ch11 = new Chauffeur(11L, "Chauffeur prive", "Sire", "Diallo", "M", "saliou@gmail.com", "776440310", "10ans", 600000,
-                "Dk-Thies", "Full-Time", true, "cv1.pdf", "photo11.jpg", p1, ad11);
+        Chauffeur ch5 = new Chauffeur(5L, "Chauffeur transport", "Mbaye", "Pouye", "776440310", "8", 250000,
+                "Partout au Senegal", "Full-Time", true, "cv_mbayePouye.pdf", "mbaye_pouye.jpeg", new Date(), "Je m'appelle Mbaye Pouye, chauffeur transport. Je peux conduire plusieurs categorie de voiture: taxi, autobus, car,  particulier. Je sais lire et ecrire en Français. Je suis diplome du Certificat de fin etude primaire.",
+                p2, ad1);
 
-        Chauffeur ch12 = new Chauffeur(12L, "Chauffeur tracteur", "Mouhamed", "Diatta", "M", "mouhamed@gmail.com", "776440310", "10ans", 600000,
-                "Dk-Thies", "Full-Time", false, "cv1.pdf", "photo12.jpg", p2, ad12);
+        Chauffeur ch6 = new Chauffeur(6L, "Chauffeur prive", "Khadim", "Ndiaye", "776440310", "8", 250000,
+                "Partout au Senegal", "Full-Time", true, "cv_khadimNdiaye.pdf", "defaut.jpeg", new Date(), "Je m'appelle Khadim Ndiaye, chauffeur prive. Je peux conduire plusieurs categorie de voiture: taxi, autobus, car,  particulier. Je sais lire et ecrire en Français. Je suis diplome du Certificat de fin etude primaire.",
+                p2, ad1);
 
-        Chauffeur ch13 = new Chauffeur(13L, "Chauffeur autobus", "Mamadi", "Sanogo", "M", "mamadi@gmail.com", "776440310", "10ans", 600000,
-                "Dk-Thies", "Full-Time", false, "cv1.pdf", "photo13.jpg", p3, ad8);
+        Chauffeur ch7 = new Chauffeur(7L, "Chauffeur professionnel", "Lamine Sow", "Kasse", "776440310", "8", 250000,
+                "Partout au Senegal", "Full-Time", true, "cv_lamineKasse.pdf", "lamine_kasse.jpeg", new Date(), "Je m'appelle Lamine sow KAsse, chauffeur prive. Je peux conduire plusieurs categorie de voiture: taxi, autobus, car,  particulier. Je sais lire et ecrire en Français. Je suis diplome du Certificat de fin etude primaire.",
+                p2, ad1);
 
-        Chauffeur ch14 = new Chauffeur(14L, "Chauffeur prive", "Alpha yaya", "Sene", "M", "alphayaya@gmail.com", "776440310", "10ans", 600000,
-                "Dk-Thies", "Full-Time", false, "cv1.pdf", "photo14.jpg", p4, ad13);
+        Chauffeur ch8 = new Chauffeur(8L, "Chauffeur Camion", "Abdou", "Diouf", "M", "abdue@gmail.com", "776440310", "10ans", 600000,
+                "Dk-Zig", "Full-Time", false, "cv1.pdf", "defaut.jpeg", p5, ad4);
+        Chauffeur ch9 = new Chauffeur(9L, "Chauffeur engin", "Malick", "Sane", "F", "malick@gmail.com", "776440310", "10ans", 600000,
+                "Dk-Thies", "Partial-Time", false, "cv1.pdf", "defaut.jpeg", p4, ad3);
 
-        Chauffeur ch15 = new Chauffeur(15L, "Chauffeur tata", "Mory", "Ba", "M", "morie@gmail.com", "776440310", "10ans", 600000,
-                "Dk-Thies", "Full-Time", false, "cv1.pdf", "photo15.jpg", p1, ad2);
+        Chauffeur ch10 = new Chauffeur(10L, "Chauffeur Taxi", "Ousseynou", "Ly", "M", "ouzin@gmail.com", "776440310", "10ans", 600000,
+                "Dk-Thies", "Full-Time", true, "cv1.pdf", "defaut.jpeg", p4, ad5);
 
-        Chauffeur ch16 = new Chauffeur(16L, "Chauffeur bus", "Lamine", "Diao", "M", "lamie@gmail.com", "776440310", "10ans", 600000,
-                "Dk-Thies", "Partail-Time", true, "cv6.pdf", "photo6.jpg", p2, ad6);
+        Chauffeur ch11 = new Chauffeur(11L, "Chauffeur Transport", "Alassane", "Badji", "M", "alassane@gmail.com", "776440310", "10ans", 600000,
+                "Dk-Thies", "Full-Time", false, "cv1.pdf", "defaut.jpeg", p4, ad6);
 
+        Chauffeur ch12 = new Chauffeur(12L, "Chauffeur prive", "Sire", "Diallo", "M", "saliou@gmail.com", "776440310", "10ans", 600000,
+                "Dk-Thies", "Full-Time", true, "cv1.pdf", "defaut.jpeg", p1, ad11);
+
+        Chauffeur ch13 = new Chauffeur(13L, "Chauffeur tracteur", "Mouhamed", "Diatta", "M", "mouhamed@gmail.com", "776440310", "10ans", 600000,
+                "Dk-Thies", "Full-Time", false, "cv1.pdf", "defaut.jpeg", p2, ad12);
+
+        Chauffeur ch14 = new Chauffeur(14L, "Chauffeur autobus", "Mamadi", "Sanogo", "M", "mamadi@gmail.com", "776440310", "10ans", 600000,
+                "Dk-Thies", "Full-Time", false, "cv1.pdf", "defaut.jpeg", p3, ad8);
+
+        Chauffeur ch15 = new Chauffeur(15L, "Chauffeur prive", "Alpha yaya", "Sene", "M", "alphayaya@gmail.com", "776440310", "10ans", 600000,
+                "Dk-Thies", "Full-Time", false, "cv1.pdf", "defaut.jpeg", p4, ad13);
+
+        Chauffeur ch16 = new Chauffeur(16L, "Chauffeur bus", "Mory", "Ba", "M", "morie@gmail.com", "776440310", "10ans", 600000,
+                "Dk-Thies", "Full-Time", false, "cv1.pdf", "defaut.jpeg", p1, ad2);
 
         chauffeurRepository.save(ch1);
         chauffeurRepository.save(ch2);
@@ -239,8 +253,16 @@ public class SenChauffeurApplication implements CommandLineRunner {
         utilisateurRepository.save(admin);
         utilisateurService.addRoleToUser("Admin", RoleName.ROLE_ADMIN);
 
+        Utilisateur thir = new Utilisateur();
+        thir.setUsername("thir");
+        thir.setName("tairou diallo");
+        thir.setEmail("tairou@gmail.com");
+        thir.setActive(true);
+        thir.setPassword(bCryptPasswordEncoder.encode("sunuchauffeur@2022"));
+        utilisateurRepository.save(thir);
+        utilisateurService.addRoleToUser("thir", RoleName.ROLE_ADMIN);
 
-
+        */
 
 
     }

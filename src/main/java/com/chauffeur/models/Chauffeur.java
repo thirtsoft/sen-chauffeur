@@ -83,6 +83,30 @@ public class Chauffeur implements Serializable {
     @JoinColumn(name = "addressId")
     private Addresse addresse;
 
+
+    public Chauffeur(Long id, String reference, String firstName, String lastName,
+                     String phoneChauffeur, String nbreAnneeExperience,
+                     double pretentionSalaire, String mobilite, String disponibity,
+                     boolean selected, String cvChauffeur, String photoChauffeur, Date dateInscription, String description,
+                     Permis permis, Addresse addresse) {
+        this.id = id;
+        this.reference = reference;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneChauffeur = phoneChauffeur;
+        this.nbreAnneeExperience = nbreAnneeExperience;
+        this.pretentionSalaire = pretentionSalaire;
+        this.mobilite = mobilite;
+        this.disponibity = disponibity;
+        this.selected = selected;
+        this.cvChauffeur = cvChauffeur;
+        this.photoChauffeur = photoChauffeur;
+        this.dateInscription = dateInscription;
+        this.description = description;
+        this.permis = permis;
+        this.addresse = addresse;
+    }
+
     public Chauffeur(Long id, String reference, String firstName, String lastName, String sexe,
                      String email, String phoneChauffeur, String nbreAnneeExperience, double pretentionSalaire, String mobilite,
                      String disponibity, boolean selected, String cvChauffeur, String photoChauffeur, Permis permis,

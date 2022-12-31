@@ -22,7 +22,7 @@ public interface ChauffeurRepository extends JpaRepository<Chauffeur, Long> {
 
     List<Chauffeur> findChauffeurByOrderByIdDesc();
 
-    @Query("select art from Chauffeur art where art.selected = true")
+    @Query("select art from Chauffeur art where art.selected = true order by id Asc")
     List<Chauffeur> findChauffeurBySelected();
 
     @Query("select p from Chauffeur p where p.permis.id =:pId")
